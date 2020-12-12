@@ -1,14 +1,28 @@
-import React, { Component } from 'react'
-import Country from './Country'
+import React from 'react'
+import Country from '../counry/Country'
 import './ListCountries.sass'
 
-function ListCountries(props) {
+function ListCountries({ countries, flags, onClickCountry, countryTarget }) {
+  //country нужен чтоб подсвечивать страну (или убрать потом)
+  const onClick = (country) => {
+    onClickCountry(country)
+  }
   return (
-    <ul className="place__list">
-      {props.Countrys.map((country) => (
-        <Country country={country} onClick={props.onCoutryClick} />
-      ))}
-    </ul>
+    <div className="listCountries">
+      <h3 className="listCountries__title">
+        Cases by Country/Region/Sovereignty
+      </h3>
+      <ul className="countries__list">
+        {countries.map((country) => (
+          <Country
+            country={country}
+            onClick={onClick}
+            key={country}
+            flag={flags[0]}
+          />
+        ))}
+      </ul>
+    </div>
   )
 }
 export default ListCountries
