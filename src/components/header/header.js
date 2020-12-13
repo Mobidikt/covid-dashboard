@@ -3,6 +3,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import Search from '../search/search'
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -24,6 +25,7 @@ const Header = () => {
           <Typography className={classes.title} variant="h5">
             Covid19 Dashboard
           </Typography>
+          <Search />
         </Toolbar>
       </AppBar>
     </header>
