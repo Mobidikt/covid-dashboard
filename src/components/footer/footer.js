@@ -1,6 +1,5 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import Link from '@material-ui/core/Link'
+import { Typography, Link } from '@material-ui/core'
 import { makeStyles, fade } from '@material-ui/core/styles'
 import Date from '../date/date'
 
