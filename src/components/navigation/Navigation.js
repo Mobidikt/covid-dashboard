@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import {
   NAV_TEXT,
   metricFirst,
@@ -43,5 +44,10 @@ function Navigation({ indicator, setIndicator }) {
       />
     </div>
   )
+}
+
+Navigation.propTypes = {
+  indicator: PropTypes.string.isRequired,
+  setIndicator: PropTypes.func.isRequired,
 }
 export default Navigation

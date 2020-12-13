@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function Selector({ lableText, values, indicator, setIndicator }) {
   const stats = (event) => {
@@ -17,4 +18,12 @@ function Selector({ lableText, values, indicator, setIndicator }) {
     </label>
   )
 }
+
+Selector.propTypes = {
+  lableText: PropTypes.string.isRequired,
+  setIndicator: PropTypes.func.isRequired,
+  values: PropTypes.arrayOf(PropTypes.object).isRequired,
+  indicator: PropTypes.string.isRequired,
+}
+
 export default Selector
