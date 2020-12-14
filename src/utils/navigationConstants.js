@@ -14,23 +14,24 @@ export const NAV_TEXT = {
   deathsLastDay: 'Deaths in the last day',
   recoveredLastDay: 'Recovered in the last day',
 }
+export const PER100 = ' per 100 thousand population'
 export const metricFirst = [
   { value: 'casesGlobal', text: 'Cases' },
   { value: 'deathsGlobal', text: 'Deaths' },
   { value: 'recoveredGlobal', text: 'Recovered' },
 ]
+// export const metricSecond = [
+//   { value: 'casesGlobalPopulation', text: 'Cases' },
+//   { value: 'deathsGlobalPopulation', text: 'Deaths' },
+//   { value: 'recoveredGlobalPopulation', text: 'Recovered' },
+// ]
 export const metricSecond = [
-  { value: 'casesGlobalPopulation', text: 'Cases' },
-  { value: 'deathsGlobalPopulation', text: 'Deaths' },
-  { value: 'recoveredGlobalPopulation', text: 'Recovered' },
-]
-export const metricThird = [
   { value: 'caseLastDay', text: 'Cases' },
   { value: 'deathsLastDay', text: 'Deaths' },
   { value: 'recoveredLastDay', text: 'Recovered' },
 ]
-export const metricFourth = [
-  { value: 'caseLastDayPopulation', text: 'Cases' },
-  { value: 'deathsLastDayPopulation', text: 'Deaths' },
-  { value: 'recoveredLastDayPopulation', text: 'Recovered' },
-]
+// export const metricFourth = [
+//   { value: 'caseLastDayPopulation', text: 'Cases' },
+//   { value: 'deathsLastDayPopulation', text: 'Deaths' },
+//   { value: 'recoveredLastDayPopulation', text: 'Recovered' },
+// ]
