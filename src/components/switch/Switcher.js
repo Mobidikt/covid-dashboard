@@ -12,20 +12,20 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-function Switcher({ population, setPopulation }) {
+function Switcher({ isPopulation, setIsPopulation }) {
   const classes = useStyles()
 
   const handleChange = () => {
-    setPopulation(!population)
+    setIsPopulation(!isPopulation)
   }
 
   return (
     <FormGroup>
       <FormControlLabel
         className={classes.switch}
-        label="per 100 thousand population"
+        label="per 100.000 population"
         control={
-          <Switch checked={population} onChange={handleChange} name="per100" />
+          <Switch checked={isPopulation} onChange={handleChange} name="per" />
         }
       />
     </FormGroup>
@@ -33,7 +33,7 @@ function Switcher({ population, setPopulation }) {
 }
 
 Switcher.propTypes = {
-  population: PropTypes.bool.isRequired,
-  setPopulation: PropTypes.func.isRequired,
+  isPopulation: PropTypes.bool.isRequired,
+  setIsPopulation: PropTypes.func.isRequired,
 }
 export default Switcher

@@ -14,16 +14,16 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-function Selector({ lableText, values, indicator, setIndicator }) {
+function Selector({ lableText, values, mode, setMode }) {
   const classes = useStyles()
   const stats = (event) => {
-    setIndicator(event.target.value)
+    setMode(event.target.value)
   }
   return (
     <>
-      <InputLabel className={classes.selector} htmlFor={indicator}>
+      <InputLabel className={classes.selector} htmlFor={mode}>
         {lableText}
-        <Select value={indicator} onChange={stats} id={indicator}>
+        <Select value={mode} onChange={stats} id={mode}>
           {values.map((item) => (
             <MenuItem value={item.value} key={item.value}>
               {item.text}
@@ -37,9 +37,9 @@ function Selector({ lableText, values, indicator, setIndicator }) {
 
 Selector.propTypes = {
   lableText: PropTypes.string.isRequired,
-  setIndicator: PropTypes.func.isRequired,
+  setMode: PropTypes.func.isRequired,
   values: PropTypes.arrayOf(PropTypes.object).isRequired,
-  indicator: PropTypes.string.isRequired,
+  mode: PropTypes.string.isRequired,
 }
 
 export default Selector

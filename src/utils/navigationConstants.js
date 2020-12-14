@@ -14,7 +14,7 @@ export const NAV_TEXT = {
   deathsLastDay: 'Deaths in the last day',
   recoveredLastDay: 'Recovered in the last day',
 }
-export const PER100 = ' per 100 thousand population'
+export const PER100 = ' per 100.000 population'
 export const metricFirst = [
   { value: 'casesGlobal', text: 'Cases' },
   { value: 'deathsGlobal', text: 'Deaths' },

@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import Navigation from '../navigation/Navigation'
-import './app.sass'
+import React from 'react'
+import './App.sass'
+import Header from '../header/Header'
+import Footer from '../footer/Footer'
+import Main from '../main/Main'
 
 function App() {
-  const [indicator, setIndicator] = useState('casesGlobal')
-  const changeIndicator = (data) => {
-    setIndicator(data)
-  }
   return (
-    <div>
-      <h1>COVID19 Dashboard</h1>
-      <Navigation indicator={indicator} setIndicator={changeIndicator} />
+    <div className="App">
+      <Header />
+      <Main />
+      <Footer />
     </div>
   )
 }

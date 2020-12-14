@@ -13,6 +13,7 @@ import Switcher from '../switch/Switcher'
 
 const useStyles = makeStyles(() => ({
   navigation: {
+    marginTop: '64px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -28,46 +29,46 @@ const useStyles = makeStyles(() => ({
   navigation__selectors: { display: 'flex', justifyContent: 'space-between' },
 }))
 
-function Navigation({ indicator, setIndicator }) {
+function Navigation({ mode, setMode }) {
   const classes = useStyles()
   const [navTitle, setNavTitle] = useState('casesGlobal')
-  const [population, setPopulation] = useState(false)
+  const [isPopulation, setIsPopulation] = useState(false)
   const renderTextNav = (data) => {
     setNavTitle(data)
   }
 
   const stats = (data) => {
-    setIndicator(data)
+    setMode(data)
     renderTextNav(data)
   }
   const renderFromPopulation = (data) => {
-    setPopulation(data)
-    stats(indicator)
+    setIsPopulation(data)
+    stats(mode)
   }
   return (
     <section className={classes.navigation}>
-      <Typography className={classes.title} variant="h3">
+      <Typography className={classes.title} variant="h4">
         {NAV_TEXT[navTitle]}
-        {population ? PER100 : ''}
+        {isPopulation ? PER100 : ''}
       </Typography>
       <div className={classes.navigation__menu}>
         <div className={classes.navigation__selectors}>
           <Selector
             lableText="Global statistics"
             values={metricFirst}
-            indicator={indicator}
-            setIndicator={stats}
+            mode={mode}
+            setMode={stats}
           />
           <Selector
             lableText="Statistics in the last day"
             values={metricSecond}
-            indicator={indicator}
-            setIndicator={stats}
+            mode={mode}
+            setMode={stats}
           />
         </div>
         <Switcher
-          population={population}
-          setPopulation={renderFromPopulation}
+          isPopulation={isPopulation}
+          setIsPopulation={renderFromPopulation}
         />
       </div>
     </section>
@@ -75,7 +76,7 @@ function Navigation({ indicator, setIndicator }) {
 }
 
 Navigation.propTypes = {
-  indicator: PropTypes.string.isRequired,
-  setIndicator: PropTypes.func.isRequired,
+  mode: PropTypes.string.isRequired,
+  setMode: PropTypes.func.isRequired,
 }
 export default Navigation
