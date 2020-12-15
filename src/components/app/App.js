@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import './app.sass'
-import Header from '../header/header'
-import Footer from '../footer/footer'
+import './App.sass'
+import Header from '../header'
+import Footer from '../footer'
+import Main from '../main'
 
 import CovidService from '../../service/covid-service'
 
-// eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
   covidService = new CovidService()
 
@@ -32,10 +32,10 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <Main />
         <Footer />
       </div>
     )
   }
 }
-
 export default App
