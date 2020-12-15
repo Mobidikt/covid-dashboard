@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import Country from '../counry/Country'
+import Country from '../counry'
 import './ListCountries.sass'
 
-function ListCountries({ countries, flags, onClickCountry, countryTarget }) {
-  //country нужен чтоб подсвечивать страну (или убрать потом)
+function ListCountries({ countries, mode }) {
   const onClick = (country) => {
     onClickCountry(country)
   }
@@ -15,14 +15,24 @@ function ListCountries({ countries, flags, onClickCountry, countryTarget }) {
       <ul className="countries__list">
         {countries.map((country) => (
           <Country
-            country={country}
+            count={country[mode.time][mode.state]}
+            country={country.name}
             onClick={onClick}
-            key={country}
-            flag={flags[0]}
+            key={country.name}
+            flag={country.flag}
           />
         ))}
       </ul>
     </div>
   )
+}
+
+ListCountries.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  mode: PropTypes.shape({
+    time: PropTypes.string,
+    state: PropTypes.string,
+    isPopulation: PropTypes.bool,
+  }).isRequired,
 }
 export default ListCountries

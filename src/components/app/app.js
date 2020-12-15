@@ -21,19 +21,23 @@ class App extends Component {
         global,
       })
     })
+    this.covidService.getListOfCountriesWithFlags().then((countries) => {
+      this.setState({
+        countries,
+      })
+    })
   }
 
   render() {
-    const { global } = this.state
-    console.log(global)
+    const { global, countries } = this.state
     // console.log(this.covidService.getListOfCountriesWithFlags())
-    // console.log(this.covidService.getActualDate())
+    //console.log(this.covidService.getActualDate())
     // console.log(this.covidService.getListOfCountries())
-    // console.log(this.covidService.getGlobalCases())
+    //console.log(this.covidService.getGlobalCases())
     return (
       <div className="App">
         <Header />
-        <Main />
+        <Main countries={countries} global={global} />
         <Footer />
       </div>
     )

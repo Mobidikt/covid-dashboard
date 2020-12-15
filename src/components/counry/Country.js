@@ -1,16 +1,42 @@
-import React from 'react'
-import './Country.sass'
+import React, { useCallback } from 'react'
+import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/core/styles'
 
-function Country({ country, onClick, flag }) {
-  const handleClick = () => {
+const useStyles = makeStyles(() => ({
+  country__flag: {
+    height: '20px',
+    width: '30px',
+  },
+  item: {
+    display: 'block',
+  },
+}))
+
+function Country({ country, onClick, flag, count }) {
+  const classes = useStyles()
+  const handleClick = useCallback(() => {
+    console.log('11')
     onClick(country)
-  }
+  }, [onClick, country])
   return (
-    <li className="" onClick={handleClick}>
-      <span className="country__number">Number</span>
-      <span className="country__name">{country}</span>
-      <span className="country__flag">Flag{flag}</span>
-    </li>
+    <button type="button" className={classes.item} onClick={handleClick}>
+      <img
+        src={flag}
+        className={classes.country__flag}
+        alt={`${country} flag`}
+      />
+      <span className={classes.country__number}>{` ${count} `}</span>
+      <span className={classes.country__name}>{country}</span>
+    </button>
   )
+}
+Country.defaultProps = {
+  flag: '',
+}
+Country.propTypes = {
+  country: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  flag: PropTypes.string,
 }
 export default Country
