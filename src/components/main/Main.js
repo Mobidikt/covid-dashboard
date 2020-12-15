@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Navigation from '../navigation/Navigation'
+import Navigation from '../navigation'
 
 function Main() {
   const [mode, setMode] = useState({

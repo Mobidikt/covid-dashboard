@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Link } from '@material-ui/core'
 import { makeStyles, fade } from '@material-ui/core/styles'
-import Date from '../date/Date'
+import Date from '../date'
 
 const useStyles = makeStyles((theme) => ({
   footer: {

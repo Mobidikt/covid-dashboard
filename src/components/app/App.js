@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './App.sass'
-import Header from '../header/Header'
-import Footer from '../footer/Footer'
-import Main from '../main/Main'
+import Header from '../header'
+import Footer from '../footer'
+import Main from '../main'
 
 import CovidService from '../../service/covid-service'
 

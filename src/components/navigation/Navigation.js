@@ -9,8 +9,8 @@ import {
   PER100,
   arr,
 } from '../../constants/navigationConstants'
-import Selector from '../selector/Selector'
-import Switcher from '../switcher/Switcher'
+import Selector from '../selector'
+import Switcher from '../switcher'
 
 const useStyles = makeStyles(() => ({
   navigation: {
