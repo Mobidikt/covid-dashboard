@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
@@ -7,9 +7,10 @@ import {
   metricFirst,
   metricSecond,
   PER100,
-} from '../../utils/navigationConstants'
+  arr,
+} from '../../constants/navigationConstants'
 import Selector from '../selector/Selector'
-import Switcher from '../switch/Switcher'
+import Switcher from '../switcher/Switcher'
 
 const useStyles = makeStyles(() => ({
   navigation: {
@@ -29,45 +30,56 @@ const useStyles = makeStyles(() => ({
   navigation__selectors: { display: 'flex', justifyContent: 'space-between' },
 }))
 
-function Navigation({ mode, setMode }) {
+function Navigation({ setMode }) {
   const classes = useStyles()
-  const [navTitle, setNavTitle] = useState('casesGlobal')
-  const [isPopulation, setIsPopulation] = useState(false)
-  const renderTextNav = (data) => {
-    setNavTitle(data)
-  }
+  const [isOnPopulation, setIsOnPopulation] = useState(false)
+  const [id, setId] = useState(0)
 
-  const stats = (data) => {
-    setMode(data)
-    renderTextNav(data)
+  useEffect(() => {
+    if (isOnPopulation) {
+      setMode({
+        time: arr[id].time,
+        state: arr[id].state,
+        isPopulation: isOnPopulation,
+      })
+    } else {
+      setMode({
+        time: arr[id].time,
+        state: arr[id].state,
+        isPopulation: isOnPopulation,
+      })
+    }
+  }, [isOnPopulation, id])
+
+  const stats = (value) => {
+    setId(value)
   }
-  const renderFromPopulation = (data) => {
-    setIsPopulation(data)
-    stats(mode)
+  const renderFromPopulation = (value) => {
+    setIsOnPopulation(value)
   }
   return (
     <section className={classes.navigation}>
       <Typography className={classes.title} variant="h4">
-        {NAV_TEXT[navTitle]}
-        {isPopulation ? PER100 : ''}
+        {NAV_TEXT[id]}
+        {isOnPopulation ? PER100 : ''}
       </Typography>
       <div className={classes.navigation__menu}>
         <div className={classes.navigation__selectors}>
           <Selector
             lableText="Global statistics"
             values={metricFirst}
-            mode={mode}
+            mode={id}
             setMode={stats}
           />
           <Selector
             lableText="Statistics in the last day"
             values={metricSecond}
-            mode={mode}
+            mode={id}
             setMode={stats}
           />
         </div>
         <Switcher
-          isPopulation={isPopulation}
+          isPopulation={isOnPopulation}
           setIsPopulation={renderFromPopulation}
         />
       </div>
@@ -76,7 +88,6 @@ function Navigation({ mode, setMode }) {
 }
 
 Navigation.propTypes = {
-  mode: PropTypes.string.isRequired,
   setMode: PropTypes.func.isRequired,
 }
 export default Navigation

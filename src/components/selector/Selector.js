@@ -21,11 +21,11 @@ function Selector({ lableText, values, mode, setMode }) {
   }
   return (
     <>
-      <InputLabel className={classes.selector} htmlFor={mode}>
+      <InputLabel className={classes.selector} htmlFor="selector">
         {lableText}
-        <Select value={mode} onChange={stats} id={mode}>
+        <Select value={mode} onChange={stats} id="selector">
           {values.map((item) => (
-            <MenuItem value={item.value} key={item.value}>
+            <MenuItem defaultValue="" value={item.value} key={item.value}>
               {item.text}
             </MenuItem>
           ))}
@@ -39,7 +39,7 @@ Selector.propTypes = {
   lableText: PropTypes.string.isRequired,
   setMode: PropTypes.func.isRequired,
   values: PropTypes.arrayOf(PropTypes.object).isRequired,
-  mode: PropTypes.string.isRequired,
+  mode: PropTypes.number.isRequired,
 }
 
 export default Selector
