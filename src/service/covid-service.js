@@ -2,26 +2,27 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-underscore-dangle */
 export default class CovidService {
-  uMap = new Map([
-    ['Cape Verde', 'Cabo Verde'],
-    ['Congo (Brazzaville)', 'Congo'],
-    ['Congo (Kinshasa)', 'Congo (Democratic Republic of the)'],
-    ['Iran, Islamic Republic of', 'Iran (Islamic Republic of)'],
-    ['Korea (South)', 'Korea (Republic of)'],
-    ['Lao PDR', `Lao People's Democratic Republic`],
-    ['Macao, SAR China', 'Macao'],
-    ['Macedonia, Republic of', 'Macedonia (the former Yugoslav Republic of)'],
-    ['Palestinian Territory', 'Palestine, State of'],
-    ['Taiwan, Republic of China', 'Taiwan'],
-    ['Venezuela (Bolivarian Republic)', 'Venezuela (Bolivarian Republic of)'],
-    ['Syrian Arab Republic (Syria)', 'Syrian Arab Republic'],
-    ['Saint Vincent and Grenadines', 'Saint Vincent and the Grenadines'],
-    ['Holy See (Vatican City State)', 'Holy See'],
-  ])
+  // uMap = new Map([
+  //   ['Cape Verde', 'Cabo Verde'],
+  //   ['Congo (Brazzaville)', 'Congo'],
+  //   ['Congo (Kinshasa)', 'Congo (Democratic Republic of the)'],
+  //   ['Iran, Islamic Republic of', 'Iran (Islamic Republic of)'],
+  //   ['Korea (South)', 'Korea (Republic of)'],
+  //   ['Lao PDR', `Lao People's Democratic Republic`],
+  //   ['Macao, SAR China', 'Macao'],
+  //   ['Macedonia, Republic of', 'Macedonia (the former Yugoslav Republic of)'],
+  //   ['Palestinian Territory', 'Palestine, State of'],
+  //   ['Taiwan, Republic of China', 'Taiwan'],
+  //   ['Venezuela (Bolivarian Republic)', 'Venezuela (Bolivarian Republic of)'],
+  //   ['Syrian Arab Republic (Syria)', 'Syrian Arab Republic'],
+  //   ['Saint Vincent and Grenadines', 'Saint Vincent and the Grenadines'],
+  //   ['Holy See (Vatican City State)', 'Holy See'],
+  // ])
 
   _apiCovidBase = `https://api.covid19api.com/`
 
-  _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag`
+  // _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag`
+  _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;latlng;`
 
   // API COVID-19
   getCovidResource = async (url) => {
@@ -67,19 +68,23 @@ export default class CovidService {
     const flags = await this.getFlagsAndPopulationResource()
     const list = await this.getListOfCountries()
     return list.map((item) => {
-      const name = this.uMap.get(item.name)
-        ? this.uMap.get(item.name)
-        : item.name
+      // const name = this.uMap.get(item.name)
+      //   ? this.uMap.get(item.name)
+      //   : item.name
+      const code = item.code
 
-      const flagAndPopObj = flags.find((el) => el.name.includes(name))
+      // const flagAndPopObj = flags.find((el) => el.name === name)
+      const flagAndPopObj = flags.find((el) => el.alpha2Code === code)
 
       if (flagAndPopObj) {
         const flag = flagAndPopObj.flag
         const population = flagAndPopObj.population
+        const latlng = flagAndPopObj.latlng
         return {
           ...item,
           flag,
           population,
+          latlng,
         }
         // eslint-disable-next-line no-else-return
       } else {
@@ -104,6 +109,7 @@ export default class CovidService {
       ...cases,
       id: idx,
       name: item.Country,
+      code: item.CountryCode,
     }
   }
 
