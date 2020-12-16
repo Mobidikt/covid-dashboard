@@ -7,6 +7,9 @@ const useStyles = makeStyles(() => ({
   header: {
     display: 'flex',
     justifyContent: 'space-between',
+    width: '96%',
+    maxWidth: '1280px',
+    margin: '0 auto',
   },
 }))
 

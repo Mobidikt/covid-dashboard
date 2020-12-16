@@ -5,13 +5,14 @@ import Date from '../date'
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    position: 'absolute',
+    padding: '10px',
+    // position: 'fixed',
     bottom: 0,
     left: 0,
-    height: '130px',
     width: '100%',
     background: '#3f51b5',
     color: 'white',
+    zIndex: '1000',
   },
   container: {
     height: '100%',
@@ -19,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0 25px',
+    maxWidth: '1280px',
+    margin: '0 auto',
   },
   logo: {
     height: '50px',

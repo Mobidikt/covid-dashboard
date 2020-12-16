@@ -14,7 +14,6 @@ import Switcher from '../switcher'
 
 const useStyles = makeStyles(() => ({
   navigation: {
-    marginTop: '64px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
