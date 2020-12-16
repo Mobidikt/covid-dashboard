@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Navigation from '../navigation'
+import DataContainer from '../data-container'
 
 function Main() {
   const [mode, setMode] = useState({
@@ -11,7 +12,12 @@ function Main() {
     setMode(data)
   }
   console.log(mode)
-  return <Navigation setMode={switchMode} />
+  return (
+    <>
+      <Navigation setMode={switchMode} />
+      <DataContainer />
+    </>
+  )
 }
 
 export default Main
