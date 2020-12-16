@@ -1,19 +1,22 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useMemo } from 'react'
 import Country from '../country'
-import './ListCountries.sass'
+import './List.scss'
 
-function ListCountries({ countries, mode, onClickCountry }) {
+function List({ countries, mode, onClickCountry }) {
   const onClick = (country) => {
     onClickCountry(country)
   }
+  const sortCountries = useMemo(() => {
+    return countries.sort((a, b) => {
+      return b[mode.time][mode.state] - a[mode.time][mode.state]
+    })
+  }, [mode, countries])
   return (
-    <div className="listCountries">
-      <h3 className="listCountries__title">
-        Cases by Country/Region/Sovereignty
-      </h3>
+    <div className="list-container">
+      <h3>List</h3>
       <ul className="countries__list">
-        {countries.map((country) => (
+        {sortCountries.map((country) => (
           <Country
             count={country[mode.time][mode.state]}
             country={country.name}
@@ -27,7 +30,7 @@ function ListCountries({ countries, mode, onClickCountry }) {
   )
 }
 
-ListCountries.propTypes = {
+List.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClickCountry: PropTypes.func.isRequired,
   mode: PropTypes.shape({
@@ -36,4 +39,4 @@ ListCountries.propTypes = {
     isPopulation: PropTypes.bool,
   }).isRequired,
 }
-export default ListCountries
+export default List

@@ -1,15 +1,15 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Search from '../search/Search'
+import Search from '../search'
 
 const useStyles = makeStyles(() => ({
   header: {
     display: 'flex',
     justifyContent: 'space-between',
-  },
-  title: {
-    cursor: 'pointer',
+    width: '96%',
+    maxWidth: '1280px',
+    margin: '0 auto',
   },
 }))
 

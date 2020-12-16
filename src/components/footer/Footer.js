@@ -1,48 +1,15 @@
 import React from 'react'
 import { Typography, Link } from '@material-ui/core'
-import { makeStyles, fade } from '@material-ui/core/styles'
-import Date from '../date/Date'
-
-const useStyles = makeStyles((theme) => ({
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    height: '130px',
-    width: '100%',
-    background: '#3f51b5',
-    color: 'white',
-  },
-  container: {
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '0 25px',
-  },
-  logo: {
-    height: '50px',
-  },
-  developer: {
-    cursor: 'pointer',
-    marginLeft: '15px',
-  },
-  courseBlock: {
-    marginTop: '10px',
-    textAlign: 'center',
-    color: fade(theme.palette.common.white, 0.7),
-  },
-}))
+import Date from '../date'
+import './Footer.scss'
 
 const Footer = () => {
-  const classes = useStyles()
-
   return (
-    <footer className={classes.footer}>
-      <div className={classes.container}>
+    <footer className="footer">
+      <div className="footer-container">
         <div>
           <Typography variant="h5">Developers:</Typography>
-          <Typography className={classes.developer}>
+          <Typography className="footer-developer">
             <Link
               href="https://github.com/Mobidikt"
               target="blank"
@@ -51,7 +18,7 @@ const Footer = () => {
               Mobidikt
             </Link>
           </Typography>
-          <Typography className={classes.developer}>
+          <Typography className="footer-developer">
             <Link
               href="https://github.com/Grenzen"
               target="blank"
@@ -60,7 +27,7 @@ const Footer = () => {
               Grenzen
             </Link>
           </Typography>
-          <Typography className={classes.developer}>
+          <Typography className="footer-developer">
             <Link
               href="https://github.com/IKLOA"
               target="blank"
@@ -70,10 +37,10 @@ const Footer = () => {
             </Link>
           </Typography>
         </div>
-        <div className={classes.courseBlock}>
+        <div className="footer-course-block">
           <Link href="https://rs.school/js/" target="blank">
             <img
-              className={classes.logo}
+              className="footer-logo"
               src="https://rs.school/images/rs_school_js.svg"
               alt="logoCourse"
             />
