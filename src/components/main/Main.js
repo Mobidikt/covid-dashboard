@@ -9,7 +9,6 @@ function Main({ countries }) {
     state: 'confirmed',
     isPopulation: false,
   })
-
   const switchMode = (data) => {
     setMode(data)
   }

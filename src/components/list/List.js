@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
+import calculationPopulation from '../../utils/calculationPopulation'
 import Country from '../country'
 import './List.scss'
 
 function List({ countries, mode, onClickCountry }) {
   const onClick = (country) => {
     onClickCountry(country)
-  }
-  function calculationPopulation(item, country) {
-    return (item * 100000) / country.population
   }
   const sortCountries = useMemo(() => {
     return countries.sort((a, b) => {
@@ -27,7 +25,14 @@ function List({ countries, mode, onClickCountry }) {
       <ul className="countries__list">
         {sortCountries.map((country) => (
           <Country
-            count={country[mode.time][mode.state]}
+            count={
+              mode.isPopulation
+                ? calculationPopulation(
+                    country[mode.time][mode.state],
+                    country
+                  ).toFixed()
+                : country[mode.time][mode.state]
+            }
             country={country.name}
             onClick={onClick}
             key={country.name}
