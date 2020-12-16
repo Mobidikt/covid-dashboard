@@ -9,11 +9,19 @@ function Main({ countries }) {
     state: 'confirmed',
     isPopulation: false,
   })
+  const [currentCountry, setCurrentCountry] = useState({})
+  console.log(currentCountry)
   const switchMode = (data) => {
     setMode(data)
   }
+  const chooseCountry = (country) => {
+    for (let i = 0; i < countries.length; i += 1) {
+      if (countries[i].name === country) return setCurrentCountry(countries[i])
+    }
+    return {}
+  }
   const sortCountries = useMemo(() => {
-    return countries.sort(function (a, b) {
+    return countries.sort((a, b) => {
       return b[mode.time][mode.state] - a[mode.time][mode.state]
     })
   }, [mode, countries])
@@ -21,7 +29,11 @@ function Main({ countries }) {
     <>
       <Navigation setMode={switchMode} />
       <div>
-        <ListCountries countries={sortCountries} mode={mode} />
+        <ListCountries
+          countries={sortCountries}
+          mode={mode}
+          onClickCountry={chooseCountry}
+        />
       </div>
     </>
   )

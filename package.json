@@ -59,6 +59,7 @@
     "@material-ui/system": "^4.11.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-window": "^1.8.6"
   }
 }

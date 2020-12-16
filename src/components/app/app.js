@@ -30,10 +30,9 @@ class App extends Component {
 
   render() {
     const { global, countries } = this.state
-    // console.log(this.covidService.getListOfCountriesWithFlags())
-    //console.log(this.covidService.getActualDate())
+    // console.log(this.covidService.getActualDate())
     // console.log(this.covidService.getListOfCountries())
-    //console.log(this.covidService.getGlobalCases())
+    // console.log(this.covidService.getGlobalCases())
     return (
       <div className="App">
         <Header />

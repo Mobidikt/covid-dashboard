@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import Country from '../counry'
+import Country from '../country'
 import './ListCountries.sass'
 
-function ListCountries({ countries, mode }) {
+function ListCountries({ countries, mode, onClickCountry }) {
   const onClick = (country) => {
     onClickCountry(country)
   }
@@ -29,6 +29,7 @@ function ListCountries({ countries, mode }) {
 
 ListCountries.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onClickCountry: PropTypes.func.isRequired,
   mode: PropTypes.shape({
     time: PropTypes.string,
     state: PropTypes.string,
