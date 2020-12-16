@@ -3,7 +3,7 @@ import React from 'react'
 import Map from '../map'
 import List from '../list'
 import Table from '../table'
-// import Chart from '../chart'
+import Chart from '../chart'
 
 import './Data-Container.scss'
 
@@ -13,6 +13,7 @@ function DataContainer() {
       <List />
       <Map />
       <Table />
+      <Chart />
     </section>
   )
 }

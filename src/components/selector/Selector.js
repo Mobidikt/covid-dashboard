@@ -1,27 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
-
-const useStyles = makeStyles(() => ({
-  selector: {
-    marginRight: '20px',
-    minWidth: '180px',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-}))
+import './Selector.scss'
 
 function Selector({ lableText, values, mode, setMode }) {
-  const classes = useStyles()
   const stats = (event) => {
     setMode(event.target.value)
   }
   return (
     <>
-      <InputLabel className={classes.selector} htmlFor="selector">
+      <InputLabel className="selector-container" htmlFor="selector">
         {lableText}
         <Select value={mode} onChange={stats} id="selector">
           {values.map((item) => (

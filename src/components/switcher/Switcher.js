@@ -3,18 +3,9 @@ import PropTypes from 'prop-types'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles(() => ({
-  switch: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-}))
+import './Switcher.scss'
 
 function Switcher({ isPopulation, setIsPopulation }) {
-  const classes = useStyles()
-
   const handleChange = () => {
     setIsPopulation(!isPopulation)
   }
@@ -22,7 +13,7 @@ function Switcher({ isPopulation, setIsPopulation }) {
   return (
     <FormGroup>
       <FormControlLabel
-        className={classes.switch}
+        className="switcher-switch"
         label="per 100.000 population"
         control={
           <Switch checked={isPopulation} onChange={handleChange} name="per" />
