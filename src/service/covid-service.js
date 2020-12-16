@@ -2,23 +2,6 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-underscore-dangle */
 export default class CovidService {
-  // uMap = new Map([
-  //   ['Cape Verde', 'Cabo Verde'],
-  //   ['Congo (Brazzaville)', 'Congo'],
-  //   ['Congo (Kinshasa)', 'Congo (Democratic Republic of the)'],
-  //   ['Iran, Islamic Republic of', 'Iran (Islamic Republic of)'],
-  //   ['Korea (South)', 'Korea (Republic of)'],
-  //   ['Lao PDR', `Lao People's Democratic Republic`],
-  //   ['Macao, SAR China', 'Macao'],
-  //   ['Macedonia, Republic of', 'Macedonia (the former Yugoslav Republic of)'],
-  //   ['Palestinian Territory', 'Palestine, State of'],
-  //   ['Taiwan, Republic of China', 'Taiwan'],
-  //   ['Venezuela (Bolivarian Republic)', 'Venezuela (Bolivarian Republic of)'],
-  //   ['Syrian Arab Republic (Syria)', 'Syrian Arab Republic'],
-  //   ['Saint Vincent and Grenadines', 'Saint Vincent and the Grenadines'],
-  //   ['Holy See (Vatican City State)', 'Holy See'],
-  // ])
-
   _apiCovidBase = `https://api.covid19api.com/`
 
   // _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag`
