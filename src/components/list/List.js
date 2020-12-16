@@ -7,8 +7,17 @@ function List({ countries, mode, onClickCountry }) {
   const onClick = (country) => {
     onClickCountry(country)
   }
+  function calculationPopulation(item, country) {
+    return (item * 100000) / country.population
+  }
   const sortCountries = useMemo(() => {
     return countries.sort((a, b) => {
+      if (mode.isPopulation) {
+        return (
+          calculationPopulation(b[mode.time][mode.state], b) -
+          calculationPopulation(a[mode.time][mode.state], a)
+        )
+      }
       return b[mode.time][mode.state] - a[mode.time][mode.state]
     })
   }, [mode, countries])
