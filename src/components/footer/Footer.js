@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Link } from '@material-ui/core'
-import './Footer.scss'
 import Date from '../date'
+import './Footer.scss'
 
 const Footer = () => {
   return (

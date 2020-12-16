@@ -9,6 +9,7 @@ import {
   PER100,
   arr,
 } from '../../constants/navigationConstants'
+
 import Selector from '../selector'
 import Switcher from '../switcher'
 
