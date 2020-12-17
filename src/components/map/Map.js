@@ -1,37 +1,31 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
-import CircleItem from '../circle-item'
+import CircleList from '../circle-list'
+import Legend from '../legend'
+import ChangeMapPoint from '../change-map-point'
+
 import './Map.scss'
+import { initZoom } from '../../constants/mapConstants'
 
-const initPosition = [0, 0]
-const initZoom = 2
-
-function Map({ countries, mode }) {
+function Map({ countries, mode, center }) {
   const [zoom] = useState(initZoom)
-
-  const circleItems = countries.map((country) => (
-    <CircleItem
-      key={country.code}
-      center={country.latlng}
-      mode={mode}
-      zoom={zoom}
-      country={country}
-    />
-  ))
-
+  const [legend] = useState(<Legend mode={mode} />)
   return (
     <MapContainer
-      center={initPosition}
+      center={center}
       zoom={zoom}
       scrollWheelZoom={false}
+      minZoom={1}
       className="map-container"
     >
       <TileLayer
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         url="https://api.mapbox.com/styles/v1/grenzen/ckirhkfl87oyc17qvkp1sgtkz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZ3JlbnplbiIsImEiOiJja2lybWIzbHgwYnphMnhzY3FjenNpMWVlIn0.uY0lYtXyU7JXDle3D600ew"
       />
-      {circleItems}
+      <ChangeMapPoint center={center} zoom={zoom} />
+      <CircleList countries={countries} mode={mode} />
+      {legend}
     </MapContainer>
   )
 }
@@ -46,6 +40,7 @@ Map.propTypes = {
     state: PropTypes.string,
     isPopulation: PropTypes.bool,
   }).isRequired,
+  center: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 
 export default Map

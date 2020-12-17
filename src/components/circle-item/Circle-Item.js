@@ -2,18 +2,21 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { CircleMarker, Popup } from 'react-leaflet'
 import calculateTotalRadius from '../../utils/calculateTotalRadius'
+import calculationPopulation from '../../utils/calculationPopulation'
 import './Circle-Item.scss'
+import { options, getDiameter } from '../../constants/mapConstants'
 
-const options = {
-  confirmed: { fillColor: 'crimson', color: 'none', fillOpacity: '.6' },
-  deaths: { fillColor: 'white', color: 'none', fillOpacity: '.6' },
-  recovered: { fillColor: 'green', color: 'none', fillOpacity: '.6' },
-}
-
-function CircleItem({ center, mode, zoom, country }) {
+function CircleItem({ center, mode, country }) {
   function calculationForRad(item) {
-    return calculateTotalRadius(item[mode.time][mode.state]) * zoom
+    const calculatedRadius = getDiameter(
+      calculateTotalRadius(item[mode.time][mode.state])
+    )
+    return mode.isPopulation ? getDiameter(calculatedRadius) : calculatedRadius
   }
+
+  const num = mode.isPopulation
+    ? calculationPopulation(country[mode.time][mode.state], country).toFixed()
+    : country[mode.time][mode.state]
 
   return (
     <>
@@ -26,9 +29,7 @@ function CircleItem({ center, mode, zoom, country }) {
           <h1>{`${country.name}`}</h1>
           <p className="popup-subtitle">
             {`${mode.time} ${mode.state}: `}
-            <span className="popup-subtitle-number">
-              {`${country[mode.time][mode.state]}`}
-            </span>
+            <span className="popup-subtitle-number">{`${num}`}</span>
           </p>
         </Popup>
       </CircleMarker>
@@ -43,7 +44,6 @@ CircleItem.propTypes = {
     isPopulation: PropTypes.bool,
   }).isRequired,
   center: PropTypes.arrayOf(PropTypes.number).isRequired,
-  zoom: PropTypes.number.isRequired,
   country: PropTypes.shape({
     name: PropTypes.string,
   }).isRequired,
