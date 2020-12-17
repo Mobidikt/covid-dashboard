@@ -1,22 +1,51 @@
-import React from 'react'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { MapContainer, TileLayer } from 'react-leaflet'
+import CircleItem from '../circle-item'
 import './Map.scss'
-import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet'
 
-const position = [0, 0]
+const initPosition = [0, 0]
+const initZoom = 2
 
-function Map() {
-  const options = { fillColor: 'red', color: 'none' }
+function Map({ countries, mode }) {
+  const [zoom] = useState(initZoom)
+
+  const circleItems = countries.map((country) => (
+    <CircleItem
+      key={country.code}
+      center={country.latlng}
+      mode={mode}
+      zoom={zoom}
+      country={country}
+    />
+  ))
+
   return (
-    <MapContainer center={position} zoom={1} className="map-container">
+    <MapContainer
+      center={initPosition}
+      zoom={zoom}
+      scrollWheelZoom={false}
+      className="map-container"
+    >
       <TileLayer
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         url="https://api.mapbox.com/styles/v1/grenzen/ckirhkfl87oyc17qvkp1sgtkz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZ3JlbnplbiIsImEiOiJja2lybWIzbHgwYnphMnhzY3FjenNpMWVlIn0.uY0lYtXyU7JXDle3D600ew"
       />
-      <CircleMarker center={[51.51, -0.12]} pathOptions={options} radius={30}>
-        <Popup>Popup in CircleMarker</Popup>
-      </CircleMarker>
+      {circleItems}
     </MapContainer>
   )
+}
+
+Map.defaultProps = {
+  countries: [],
+}
+Map.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.object),
+  mode: PropTypes.shape({
+    time: PropTypes.string,
+    state: PropTypes.string,
+    isPopulation: PropTypes.bool,
+  }).isRequired,
 }
 
 export default Map

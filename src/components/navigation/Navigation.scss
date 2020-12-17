@@ -1,0 +1,20 @@
+.navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navigation-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.navigation-menu {
+  display: flex;
+  justify-content: space-around;
+}
+
+.navigation-selectors { 
+  display: flex;
+  justify-content: space-between
+}

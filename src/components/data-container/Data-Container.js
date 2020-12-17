@@ -10,16 +10,18 @@ import './Data-Container.scss'
 function DataContainer({ mode, countries }) {
   const [currentCountry, setCurrentCountry] = useState({})
   const chooseCountry = (country) => {
-    for (let i = 0; i < countries.length; i += 1) {
-      if (countries[i].name === country) return setCurrentCountry(countries[i])
-    }
-    return {}
+    const pointCountry = countries.find((el) => el.name === country)
+    return setCurrentCountry(pointCountry)
+    // for (let i = 0; i < countries.length; i += 1) {
+    //   if (countries[i].name === country) return setCurrentCountry(countries[i])
+    // }
+    // return {}
   }
   console.log(currentCountry)
   return (
     <section className="root">
       <List countries={countries} mode={mode} onClickCountry={chooseCountry} />
-      <Map />
+      <Map countries={countries} mode={mode} />
       <Table />
       <Chart />
     </section>
