@@ -1,0 +1,19 @@
+.card {
+  width: 359px;
+  height: 85px;
+  border-bottom: 1px solid rgb(182, 179, 179);
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title-information {
+  display: flex;
+}
+
+.card-title-information__count {
+  margin-right: 5px !important;
+}
