@@ -1,18 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'
-import { options, grades, getDiameter } from '../../constants/mapConstants'
+import { grades, getDiameter } from '../../constants/mapConstants'
 import calculateTotalRadius from '../../utils/calculateTotalRadius'
 
 import './Legend.scss'
 
-function Legend({ mode }) {
+function Legend() {
   const map = useMap()
-  const [color] = useState(options[mode.state].fillColor)
-
-  useEffect(() => {
-    console.log('color was changed', color)
-  }, [color])
+  const [color] = useState('#FFFFFF')
 
   const getColor = () => {
     return color
