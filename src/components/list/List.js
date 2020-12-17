@@ -27,10 +27,12 @@ function List({ countries, mode, onClickCountry }) {
           <Country
             count={
               mode.isPopulation
-                ? +calculationPopulation(
-                    country[mode.time][mode.state],
-                    country
-                  ).toFixed()
+                ? Math.round(
+                    calculationPopulation(
+                      country[mode.time][mode.state],
+                      country
+                    )
+                  )
                 : country[mode.time][mode.state]
             }
             country={country.name}

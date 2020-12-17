@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import {
   NAV_TEXT,
   metricFirst,
-  metricSecond,
   PER100,
   arr,
 } from '../../constants/navigationConstants'
@@ -33,23 +32,24 @@ const useStyles = makeStyles(() => ({
 function Navigation({ setMode }) {
   const classes = useStyles()
   const [isOnPopulation, setIsOnPopulation] = useState(false)
+  const [isLastDay, setIsLastDay] = useState(false)
   const [id, setId] = useState(0)
 
   useEffect(() => {
-    if (isOnPopulation) {
+    if (isLastDay) {
       setMode({
-        time: arr[id].time,
+        time: 'new',
         state: arr[id].state,
         isPopulation: isOnPopulation,
       })
     } else {
       setMode({
-        time: arr[id].time,
+        time: 'total',
         state: arr[id].state,
         isPopulation: isOnPopulation,
       })
     }
-  }, [isOnPopulation, id])
+  }, [isOnPopulation, id, isLastDay])
 
   const stats = (value) => {
     setId(value)
@@ -57,9 +57,13 @@ function Navigation({ setMode }) {
   const renderFromPopulation = (value) => {
     setIsOnPopulation(value)
   }
+  const renderStateLastDay = (value) => {
+    setIsLastDay(value)
+  }
   return (
     <section className={classes.navigation}>
       <Typography className={classes.title} variant="h4">
+        {isLastDay ? 'Last day ' : 'Global '}
         {NAV_TEXT[id]}
         {isOnPopulation ? PER100 : ''}
       </Typography>
@@ -71,14 +75,14 @@ function Navigation({ setMode }) {
             mode={id}
             setMode={stats}
           />
-          <Selector
-            lableText="Statistics in the last day"
-            values={metricSecond}
-            mode={id}
-            setMode={stats}
-          />
         </div>
         <Switcher
+          lableText="Statistics in the last day"
+          isPopulation={isLastDay}
+          setIsPopulation={renderStateLastDay}
+        />
+        <Switcher
+          lableText="per 100.000 population"
           isPopulation={isOnPopulation}
           setIsPopulation={renderFromPopulation}
         />
