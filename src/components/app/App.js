@@ -7,7 +7,19 @@ import Main from '../main'
 import CovidService from '../../service/covid-service'
 
 function App() {
-  const [global, setGlobal] = useState([])
+  const [global, setGlobal] = useState({
+    total: {
+      confirmed: 0,
+      deaths: 0,
+      recovered: 0,
+    },
+    new: {
+      confirmed: 0,
+      deaths: 0,
+      recovered: 0,
+    },
+    population: 0,
+  })
   const [countries, setCountries] = useState([])
   const covidService = new CovidService()
   useEffect(() => {
@@ -20,7 +32,6 @@ function App() {
       setCountries(allCountriesInfo)
     })
   }, [])
-
   const [mode, setMode] = useState({
     time: 'total',
     state: 'confirmed',

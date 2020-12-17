@@ -108,6 +108,7 @@ export default class CovidService {
         deaths: object.NewDeaths,
         recovered: object.NewRecovered,
       },
+      population: 7500000000,
     }
   }
 }

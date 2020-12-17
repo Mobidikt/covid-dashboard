@@ -7,7 +7,7 @@ import Chart from '../chart'
 
 import './Data-Container.scss'
 
-function DataContainer({ mode, countries }) {
+function DataContainer({ mode, countries, global }) {
   const [currentCountry, setCurrentCountry] = useState({})
   const chooseCountry = (country) => {
     for (let i = 0; i < countries.length; i += 1) {
@@ -15,21 +15,34 @@ function DataContainer({ mode, countries }) {
     }
     return {}
   }
-  console.log(currentCountry)
   return (
     <section className="root">
       <List countries={countries} mode={mode} onClickCountry={chooseCountry} />
       <Map />
-      <Table />
+      <Table global={global} mode={mode} currentCountry={currentCountry} />
       <Chart />
     </section>
   )
 }
 DataContainer.defaultProps = {
   countries: [],
+  global: {},
 }
 DataContainer.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object),
+  global: PropTypes.shape({
+    total: PropTypes.shape({
+      confirmed: PropTypes.number,
+      deaths: PropTypes.number,
+      recovered: PropTypes.number,
+    }),
+    new: PropTypes.shape({
+      confirmed: PropTypes.number,
+      deaths: PropTypes.number,
+      recovered: PropTypes.number,
+    }),
+    population: PropTypes.number,
+  }),
   mode: PropTypes.shape({
     time: PropTypes.string,
     state: PropTypes.string,
