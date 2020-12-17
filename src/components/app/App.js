@@ -8,6 +8,7 @@ import CovidService from '../../service/covid-service'
 
 class App extends Component {
   covidService = new CovidService()
+
   // eslint-disable-next-line react/state-in-constructor
   state = { global: null }
 
