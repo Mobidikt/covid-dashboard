@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import './Country.scss'
 
 function Country({ country, onClick, flag, count }) {
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     onClick(country)
-  }, [onClick, country])
+  }
   return (
     <ListItem button onClick={handleClick}>
       <img src={flag} className="country-flag" alt={`${country} flag`} />

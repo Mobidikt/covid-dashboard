@@ -12,8 +12,8 @@ function Table({ global, mode, currentCountry }) {
   if (!countryOrWorld) {
     return 'loading...'
   }
-
   const modeTime = mode.time
+  // console.log(global[modeTime].confirmed)
 
   const confirmedCount = mode.isPopulation
     ? calculationPopulation(countryOrWorld[modeTime].confirmed, countryOrWorld)
@@ -24,7 +24,6 @@ function Table({ global, mode, currentCountry }) {
   const recoveredCount = mode.isPopulation
     ? calculationPopulation(countryOrWorld[modeTime].recovered, countryOrWorld)
     : countryOrWorld[modeTime].recovered
-
   return (
     <div className="table-container">
       <Grid container>

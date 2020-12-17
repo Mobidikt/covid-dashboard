@@ -5,6 +5,15 @@ import { makeStyles, fade } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   search: {
+    [theme.breakpoints.up('xs')]: {
+      width: '120px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '120px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '220px',
+    },
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {

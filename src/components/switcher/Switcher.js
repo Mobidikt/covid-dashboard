@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import './Switcher.scss'
 
-function Switcher({ isPopulation, setIsPopulation }) {
+function Switcher({ lableText, isPopulation, setIsPopulation }) {
   const handleChange = () => {
     setIsPopulation(!isPopulation)
   }
@@ -14,7 +14,7 @@ function Switcher({ isPopulation, setIsPopulation }) {
     <FormGroup>
       <FormControlLabel
         className="switcher-switch"
-        label="per 100.000 population"
+        label={lableText}
         control={
           <Switch checked={isPopulation} onChange={handleChange} name="per" />
         }
@@ -22,8 +22,11 @@ function Switcher({ isPopulation, setIsPopulation }) {
     </FormGroup>
   )
 }
-
+Switcher.defaultProps = {
+  lableText: '',
+}
 Switcher.propTypes = {
+  lableText: PropTypes.string,
   isPopulation: PropTypes.bool.isRequired,
   setIsPopulation: PropTypes.func.isRequired,
 }
