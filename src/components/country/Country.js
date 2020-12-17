@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import ListItem from '@material-ui/core/ListItem'
@@ -16,9 +16,9 @@ const useStyles = makeStyles(() => ({
 }))
 function Country({ country, onClick, flag, count }) {
   const classes = useStyles()
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     onClick(country)
-  }, [onClick, country])
+  }
   return (
     <ListItem button onClick={handleClick}>
       <img
