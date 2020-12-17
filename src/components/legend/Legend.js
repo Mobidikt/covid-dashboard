@@ -9,6 +9,7 @@ import './Legend.scss'
 function Legend() {
   const map = useMap()
   const [color] = useState('#FFFFFF')
+  let isToggleLegend = false
 
   const getColor = () => {
     return color
@@ -20,6 +21,7 @@ function Legend() {
   }
 
   const legend = L.control({ position: 'topright' })
+  const legendButton = L.control({ position: 'topright' })
 
   legend.onAdd = () => {
     const div = L.DomUtil.create('div', 'info legend')
@@ -35,7 +37,19 @@ function Legend() {
     div.innerHTML = labels.join('')
     return div
   }
-  legend.addTo(map)
+  const toggleEvent = () => {
+    isToggleLegend = !isToggleLegend
+    // eslint-disable-next-line no-unused-expressions
+    isToggleLegend ? legend.addTo(map) : legend.remove(map)
+  }
+
+  legendButton.onAdd = () => {
+    const button = L.DomUtil.create('button', 'legend-button')
+    button.innerHTML = 'L'
+    button.addEventListener('click', toggleEvent)
+    return button
+  }
+  legendButton.addTo(map)
   return null
 }
 

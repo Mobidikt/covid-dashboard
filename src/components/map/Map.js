@@ -10,7 +10,9 @@ import { initZoom } from '../../constants/mapConstants'
 
 function Map({ countries, mode, center }) {
   const [zoom] = useState(initZoom)
-  const [legend] = useState(<Legend mode={mode} />)
+
+  const [legend] = useState(<Legend />)
+
   return (
     <MapContainer
       center={center}

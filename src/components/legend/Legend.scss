@@ -1,4 +1,11 @@
+div.leaflet-top.leaflet-right > button.legend-button {
+  margin: 3px;
+  z-index: 1000;
+}
+
 div.info.legend.leaflet-control {
+  position: relative;
+  top: -28px;
   margin: 0;
   background-color: #081217e3;
   padding: 10px;
