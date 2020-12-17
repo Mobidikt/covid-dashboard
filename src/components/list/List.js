@@ -27,7 +27,7 @@ function List({ countries, mode, onClickCountry }) {
           <Country
             count={
               mode.isPopulation
-                ? calculationPopulation(
+                ? +calculationPopulation(
                     country[mode.time][mode.state],
                     country
                   ).toFixed()
