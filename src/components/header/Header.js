@@ -1,33 +1,100 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Search from '../search'
+import PropTypes from 'prop-types'
+import {
+  NAV_TEXT,
+  metricFirst,
+  PER100,
+  arr,
+} from '../../constants/navigationConstants'
 
-const useStyles = makeStyles(() => ({
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    width: '96%',
-    maxWidth: '1280px',
-    margin: '0 auto',
+import './Header.scss'
+import Search from '../search'
+import Selector from '../selector'
+import Switcher from '../switcher'
+
+const useStyles = makeStyles((theme) => ({
+  header__logo: {
+    [theme.breakpoints.up('xs')]: {
+      width: '100px',
+      fontSize: '20px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '150px',
+      fontSize: '20px',
+    },
   },
 }))
 
-const Header = () => {
+const Header = ({ setMode }) => {
   const classes = useStyles()
+  const [isOnPopulation, setIsOnPopulation] = useState(false)
+  const [isLastDay, setIsLastDay] = useState(false)
+  const [id, setId] = useState(0)
 
+  useEffect(() => {
+    if (isLastDay) {
+      setMode({
+        time: 'new',
+        state: arr[id].state,
+        isPopulation: isOnPopulation,
+      })
+    } else {
+      setMode({
+        time: 'total',
+        state: arr[id].state,
+        isPopulation: isOnPopulation,
+      })
+    }
+  }, [isOnPopulation, id, isLastDay])
+
+  const stats = (value) => {
+    setId(value)
+  }
+  const renderFromPopulation = (value) => {
+    setIsOnPopulation(value)
+  }
+  const renderStateLastDay = (value) => {
+    setIsLastDay(value)
+  }
   return (
     <header>
-      <AppBar position="fixed">
-        <Toolbar className={classes.header}>
-          <Typography className={classes.title} variant="h5">
+      <AppBar className="header" position="fixed">
+        <Toolbar className="header__toolbar">
+          <Typography className={classes.header__logo} variant="h5">
             Covid19 Dashboard
           </Typography>
+          <h1 className="header__title">
+            {isLastDay ? 'Last day ' : 'Global '}
+            {NAV_TEXT[id]}
+            {isOnPopulation ? PER100 : ''}
+          </h1>
           <Search />
         </Toolbar>
+        <div className="header__menu">
+          <Selector
+            lableText="Global statistics"
+            values={metricFirst}
+            mode={id}
+            setMode={stats}
+          />
+          <Switcher
+            lableText="Last day"
+            isPopulation={isLastDay}
+            setIsPopulation={renderStateLastDay}
+          />
+          <Switcher
+            lableText="per 100.000"
+            isPopulation={isOnPopulation}
+            setIsPopulation={renderFromPopulation}
+          />
+        </div>
       </AppBar>
     </header>
   )
 }
-
+Header.propTypes = {
+  setMode: PropTypes.func.isRequired,
+}
 export default Header

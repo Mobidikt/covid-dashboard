@@ -21,10 +21,18 @@ function App() {
     })
   }, [])
 
+  const [mode, setMode] = useState({
+    time: 'total',
+    state: 'confirmed',
+    isPopulation: false,
+  })
+  const switchMode = (data) => {
+    setMode(data)
+  }
   return (
     <div className="App">
-      <Header />
-      <Main countries={countries} global={global} />
+      <Header setMode={switchMode} />
+      <Main countries={countries} global={global} mode={mode} />
       <Footer />
     </div>
   )

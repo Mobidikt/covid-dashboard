@@ -1,21 +1,10 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import Navigation from '../navigation'
+import React from 'react'
 import DataContainer from '../data-container'
 
-function Main({ countries }) {
-  const [mode, setMode] = useState({
-    time: 'total',
-    state: 'confirmed',
-    isPopulation: false,
-  })
-  const switchMode = (data) => {
-    setMode(data)
-  }
-
+function Main({ countries, mode }) {
   return (
     <>
-      <Navigation setMode={switchMode} />
       <DataContainer mode={mode} countries={countries} />
     </>
   )
@@ -25,6 +14,11 @@ Main.defaultProps = {
 }
 Main.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object),
+  mode: PropTypes.shape({
+    time: PropTypes.string,
+    state: PropTypes.string,
+    isPopulation: PropTypes.bool,
+  }).isRequired,
 }
 
 export default Main
