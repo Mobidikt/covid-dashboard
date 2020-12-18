@@ -11,7 +11,7 @@ import { initPosition } from '../../constants/mapConstants'
 function DataContainer({ mode, countries, global }) {
   const [currentCountry, setCurrentCountry] = useState({})
   const [center, setCenter] = useState(initPosition)
-
+  console.log(currentCountry)
   const chooseCountry = (country) => {
     const pointCountry = countries.find((el) => el.name === country)
       ? countries.find((el) => el.name === country)
@@ -21,7 +21,13 @@ function DataContainer({ mode, countries, global }) {
   }
   return (
     <section className="root">
-      <List countries={countries} mode={mode} onClickCountry={chooseCountry} />
+      <List
+        global={global}
+        countries={countries}
+        mode={mode}
+        onClickCountry={chooseCountry}
+        currentCountry={currentCountry}
+      />
       <Map
         countries={countries}
         mode={mode}

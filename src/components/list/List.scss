@@ -1,9 +1,37 @@
-.root div.list-container {
-    overflow-y: scroll;
+.list-container{
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+box-sizing: border-box;
+overflow: hidden;
+border-radius: 2px;
+}
+.list__title{
+  padding: 0 10px 0 10px;
+  margin: 0;
+height: 20%;
+  border-bottom: 1px solid rgb(182, 179, 179) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list__title_flag {
+  border: 1px solid #000000;
+  height: 20px;
+  width: 30px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+.list__countries{
+  margin: 0;
+  height: 80%;
+  overflow: hidden;
+  padding: 0;
+  overflow-y: scroll;
   }
+  // .list__countries ::-webkit-scrollbar{
+  //   width: 0 !important;
+  // }
 @media screen and (min-width: 750px) {
   .root div.list-container {
     width: 25%;
-    overflow-y: scroll;
   }
 }

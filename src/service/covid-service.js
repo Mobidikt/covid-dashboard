@@ -4,6 +4,11 @@
 export default class CovidService {
   GLOBAL_POPULATION = 7500000000
 
+  GLOBAL_FLAG =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Peace_Congress_flag.svg/1500px-Peace_Congress_flag.svg.png'
+
+  GLOBAL_NAME = 'World'
+
   _apiCovidBase = `https://api.covid19api.com/`
 
   _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;latlng;`
@@ -106,6 +111,8 @@ export default class CovidService {
         recovered: object.NewRecovered,
       },
       population: this.GLOBAL_POPULATION,
+      flag: this.GLOBAL_FLAG,
+      name: this.GLOBAL_NAME,
     }
   }
 }

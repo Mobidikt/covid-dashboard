@@ -9,7 +9,7 @@ function Country({ country, onClick, flag, count }) {
     onClick(country)
   }
   return (
-    <ListItem button onClick={handleClick}>
+    <ListItem className="country" button onClick={handleClick}>
       <img src={flag} className="country-flag" alt={`${country} flag`} />
       <ListItemText primary={` ${count} ${country}`} />
     </ListItem>
