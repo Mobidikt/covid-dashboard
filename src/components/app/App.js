@@ -40,6 +40,7 @@ function App() {
   const switchMode = (data) => {
     setMode(data)
   }
+
   return (
     <div className="App">
       <Header setMode={switchMode} />
