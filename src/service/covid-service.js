@@ -1,10 +1,11 @@
-/* eslint-disable prefer-destructuring */
 /* eslint-disable no-return-await */
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-underscore-dangle */
 export default class CovidService {
+  GLOBAL_POPULATION = 7500000000
+
   _apiCovidBase = `https://api.covid19api.com/`
 
-  // _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag`
   _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;latlng;`
 
   // API COVID-19
@@ -51,12 +52,8 @@ export default class CovidService {
     const flags = await this.getFlagsAndPopulationResource()
     const list = await this.getListOfCountries()
     return list.map((item) => {
-      // const name = this.uMap.get(item.name)
-      //   ? this.uMap.get(item.name)
-      //   : item.name
       const code = item.code
 
-      // const flagAndPopObj = flags.find((el) => el.name === name)
       const flagAndPopObj = flags.find((el) => el.alpha2Code === code)
 
       if (flagAndPopObj) {
@@ -108,7 +105,7 @@ export default class CovidService {
         deaths: object.NewDeaths,
         recovered: object.NewRecovered,
       },
-      population: 7500000000,
+      population: this.GLOBAL_POPULATION,
     }
   }
 }

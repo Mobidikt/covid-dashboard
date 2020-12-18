@@ -14,13 +14,20 @@ function DataContainer({ mode, countries, global }) {
 
   const chooseCountry = (country) => {
     const pointCountry = countries.find((el) => el.name === country)
+      ? countries.find((el) => el.name === country)
+      : countries.find((el) => el.name === country.name)
     setCenter(() => pointCountry.latlng)
     return setCurrentCountry(pointCountry)
   }
   return (
     <section className="root">
       <List countries={countries} mode={mode} onClickCountry={chooseCountry} />
-      <Map countries={countries} mode={mode} center={center} />
+      <Map
+        countries={countries}
+        mode={mode}
+        center={center}
+        onClickCountry={chooseCountry}
+      />
       <Table global={global} mode={mode} currentCountry={currentCountry} />
       <Chart />
     </section>
