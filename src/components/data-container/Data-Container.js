@@ -6,19 +6,21 @@ import Table from '../table'
 import Chart from '../chart'
 
 import './Data-Container.scss'
+import { initPosition } from '../../constants/mapConstants'
 
 function DataContainer({ mode, countries, global }) {
   const [currentCountry, setCurrentCountry] = useState({})
+  const [center, setCenter] = useState(initPosition)
+
   const chooseCountry = (country) => {
-    for (let i = 0; i < countries.length; i += 1) {
-      if (countries[i].name === country) return setCurrentCountry(countries[i])
-    }
-    return {}
+    const pointCountry = countries.find((el) => el.name === country)
+    setCenter(() => pointCountry.latlng)
+    return setCurrentCountry(pointCountry)
   }
   return (
     <section className="root">
       <List countries={countries} mode={mode} onClickCountry={chooseCountry} />
-      <Map />
+      <Map countries={countries} mode={mode} center={center} />
       <Table global={global} mode={mode} currentCountry={currentCountry} />
       <Chart />
     </section>

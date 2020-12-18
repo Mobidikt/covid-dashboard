@@ -1,31 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import './Country.scss'
 
-const useStyles = makeStyles(() => ({
-  country__flag: {
-    height: '20px',
-    width: '30px',
-    marginRight: '10px',
-  },
-  item: {
-    display: 'block',
-  },
-}))
 function Country({ country, onClick, flag, count }) {
-  const classes = useStyles()
   const handleClick = () => {
     onClick(country)
   }
   return (
     <ListItem button onClick={handleClick}>
-      <img
-        src={flag}
-        className={classes.country__flag}
-        alt={`${country} flag`}
-      />
+      <img src={flag} className="country-flag" alt={`${country} flag`} />
       <ListItemText primary={` ${count} ${country}`} />
     </ListItem>
   )
