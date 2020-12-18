@@ -1,12 +1,19 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { CircleMarker, Popup } from 'react-leaflet'
 import calculateTotalRadius from '../../utils/calculateTotalRadius'
 import calculationPopulation from '../../utils/calculationPopulation'
 import './Circle-Item.scss'
 import { options, getDiameter } from '../../constants/mapConstants'
 
-function CircleItem({ center, mode, country }) {
+function CircleItem({ center, mode, country, onClick }) {
+  const handleClick = useMemo(() => ({
+    click() {
+      onClick(country)
+    },
+  }))
   function calculationForRad(item) {
     const calculatedRadius = getDiameter(
       calculateTotalRadius(item[mode.time][mode.state])
@@ -24,6 +31,7 @@ function CircleItem({ center, mode, country }) {
         center={center}
         pathOptions={options[mode.state]}
         radius={calculationForRad(country)}
+        eventHandlers={handleClick}
       >
         <Popup>
           <h1>{`${country.name}`}</h1>
@@ -47,6 +55,7 @@ CircleItem.propTypes = {
   country: PropTypes.shape({
     name: PropTypes.string,
   }).isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default CircleItem

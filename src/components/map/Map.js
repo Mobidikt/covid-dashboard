@@ -8,10 +8,10 @@ import ChangeMapPoint from '../change-map-point'
 import './Map.scss'
 import { initZoom } from '../../constants/mapConstants'
 
-function Map({ countries, mode, center }) {
+function Map({ countries, mode, center, onClickCountry }) {
   const [zoom] = useState(initZoom)
-
   const [legend] = useState(<Legend />)
+  const chooseCountryInMap = (country) => onClickCountry(country)
 
   return (
     <MapContainer
@@ -26,7 +26,11 @@ function Map({ countries, mode, center }) {
         url="https://api.mapbox.com/styles/v1/grenzen/ckirhkfl87oyc17qvkp1sgtkz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZ3JlbnplbiIsImEiOiJja2lybWIzbHgwYnphMnhzY3FjenNpMWVlIn0.uY0lYtXyU7JXDle3D600ew"
       />
       <ChangeMapPoint center={center} zoom={zoom} />
-      <CircleList countries={countries} mode={mode} />
+      <CircleList
+        countries={countries}
+        mode={mode}
+        onClick={chooseCountryInMap}
+      />
       {legend}
     </MapContainer>
   )
@@ -43,6 +47,7 @@ Map.propTypes = {
     isPopulation: PropTypes.bool,
   }).isRequired,
   center: PropTypes.arrayOf(PropTypes.number).isRequired,
+  onClickCountry: PropTypes.func.isRequired,
 }
 
 export default Map
