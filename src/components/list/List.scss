@@ -1,9 +1,15 @@
 .root div.list-container {
-    overflow-y: scroll;
-  }
+  order: 1;
+  overflow-y: scroll;
+}
 @media screen and (min-width: 750px) {
   .root div.list-container {
-    width: 25%;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 81.75vh;
     overflow-y: scroll;
+    border: 1px solid;
   }
 }

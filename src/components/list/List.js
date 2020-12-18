@@ -21,7 +21,6 @@ function List({ countries, mode, onClickCountry }) {
   }, [mode, countries])
   return (
     <div className="list-container">
-      <h3>List</h3>
       <ul className="countries__list">
         {sortCountries.map((country) => (
           <Country

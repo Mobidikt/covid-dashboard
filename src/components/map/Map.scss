@@ -2,8 +2,6 @@
   opacity: 0.2;
 }
 
-@media screen and (min-width: 750px) {
-  .root div.map-container {
-    width: 40%;
-  }
+.root div.map-container {
+  order: 2;
 }

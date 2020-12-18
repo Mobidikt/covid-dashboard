@@ -1,6 +1,9 @@
+div.MuiCardContent-root:last-child {
+  padding-bottom: 0;
+  padding: 5px;
+}
+
 .card {
-  width: 359px;
-  height: 85px;
   border-bottom: 1px solid rgb(182, 179, 179);
 }
 

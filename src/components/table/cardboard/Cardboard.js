@@ -24,9 +24,6 @@ function Cardboard({ title, count, modeTime, titleColor }) {
             <Typography variant="body2">{modeLabel}</Typography>
           </div>
         </div>
-        <div className="card-regions">
-          <Typography>Список регионов</Typography>
-        </div>
       </CardContent>
     </Grid>
   )
