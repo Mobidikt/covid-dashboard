@@ -10,6 +10,7 @@ const Date = () => {
       setDate(data)
     })
   }, [])
+
   return (
     <div>
       <Typography variant="h5">{date}</Typography>

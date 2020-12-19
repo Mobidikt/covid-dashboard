@@ -36,7 +36,7 @@ function DataContainer({ mode, countries, global }) {
           center={center}
           onClickCountry={chooseCountry}
         />
-        <Chart />
+        <Chart global={global} mode={mode} currentCountry={currentCountry} />
       </div>
     </section>
   )
