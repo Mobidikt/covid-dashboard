@@ -1,20 +1,22 @@
 .root {
-  margin-bottom: 50px;
 
   .root-items-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
 
   .list-container {
     height: 20vh;
   }
-  
-  .map-container,
+
   .chart-container {
     height: 50vh;
   }
+  
+  .map-container {
+    height: 50vh;
+  }
+
   .map-container,
   .chart-container,
   .list-container {
@@ -33,6 +35,11 @@
 
     .root-items-container {
       width: 48%;
+      max-width: 50rem;
+
+      .chart-container {
+        height: 30vh;
+      }
     }
   }
 }

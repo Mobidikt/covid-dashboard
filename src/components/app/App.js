@@ -21,6 +21,8 @@ function App() {
     population: 0,
   })
   const [countries, setCountries] = useState([])
+  // eslint-disable-next-line no-unused-vars
+  const [matchFromSearch, setMatchFromSearch] = useState({})
   const covidService = new CovidService()
   useEffect(() => {
     covidService.getGlobalCases().then((globalStatistics) => {
@@ -41,10 +43,21 @@ function App() {
     setMode(data)
   }
 
+  const matchInApp = (country) =>
+    Object.keys(country).length ? setMatchFromSearch(country) : null
   return (
     <div className="App">
-      <Header setMode={switchMode} />
-      <Main countries={countries} global={global} mode={mode} />
+      <Header
+        setMode={switchMode}
+        countries={countries}
+        matchInApp={matchInApp}
+      />
+      <Main
+        countries={countries}
+        global={global}
+        mode={mode}
+        matchFromSearch={matchFromSearch}
+      />
       <Footer />
     </div>
   )

@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Header = ({ setMode }) => {
+const Header = ({ setMode, countries, matchInApp }) => {
   const classes = useStyles()
   const [isOnPopulation, setIsOnPopulation] = useState(false)
   const [isLastDay, setIsLastDay] = useState(false)
@@ -58,6 +58,8 @@ const Header = ({ setMode }) => {
   const renderStateLastDay = (value) => {
     setIsLastDay(value)
   }
+  const liftMatchToApp = (country) => matchInApp(country)
+
   return (
     <header>
       <AppBar className="header" position="fixed">
@@ -70,7 +72,7 @@ const Header = ({ setMode }) => {
             {NAV_TEXT[id]}
             {isOnPopulation ? PER100 : ''}
           </h1>
-          <Search />
+          <Search countries={countries} liftMatchToApp={liftMatchToApp} />
         </Toolbar>
         <div className="header__menu">
           <Selector
@@ -95,6 +97,8 @@ const Header = ({ setMode }) => {
   )
 }
 Header.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   setMode: PropTypes.func.isRequired,
+  matchInApp: PropTypes.func.isRequired,
 }
 export default Header

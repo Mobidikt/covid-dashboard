@@ -1,71 +1,50 @@
-import React from 'react'
-import InputBase from '@material-ui/core/InputBase'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import SearchIcon from '@material-ui/icons/Search'
-import { makeStyles, fade } from '@material-ui/core/styles'
+import MatchList from './match-list'
+import './Search.scss'
 
-const useStyles = makeStyles((theme) => ({
-  search: {
-    [theme.breakpoints.up('xs')]: {
-      width: '120px',
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: '120px',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '220px',
-    },
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    display: 'flex',
-    alignItems: 'center',
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-}))
+const Search = ({ countries, liftMatchToApp }) => {
+  const [matches, setMatches] = useState([])
+  const [text, setText] = useState('')
 
-const Search = () => {
-  const classes = useStyles()
+  const countryFilter = (wordToMatch) =>
+    countries.filter((country) => {
+      const reg = new RegExp(wordToMatch, 'gi')
+      return country.name.match(reg)
+    })
+
+  function findMatches(e) {
+    const { value } = e.target
+    setText(value)
+    const array = countryFilter(value)
+    setMatches(() => array)
+  }
+
+  const liftedMatch = (country) => liftMatchToApp(country)
 
   return (
-    <div className={classes.search}>
-      <div className={classes.searchIcon}>
-        <SearchIcon />
+    <>
+      <div className="search">
+        <div className="search-icon">
+          <SearchIcon />
+        </div>
+        <input
+          placeholder="Search country"
+          className="search-input"
+          list="countrySearch"
+          aria-label="search"
+          onChange={findMatches}
+        />
       </div>
-      <InputBase
-        placeholder="Search…"
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput,
-        }}
-        inputProps={{ 'aria-label': 'search' }}
-      />
-    </div>
+      <MatchList text={text} liftedMatch={liftedMatch} matches={matches} />
+    </>
   )
+}
+
+Search.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  liftMatchToApp: PropTypes.func.isRequired,
 }
 
 export default Search

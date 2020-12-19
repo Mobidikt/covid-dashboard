@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Map from '../map'
 import List from '../list'
@@ -8,7 +8,7 @@ import Chart from '../chart'
 import './Data-Container.scss'
 import { initPosition } from '../../constants/mapConstants'
 
-function DataContainer({ mode, countries, global }) {
+function DataContainer({ mode, countries, global, matchFromSearch }) {
   const [currentCountry, setCurrentCountry] = useState({})
   const [center, setCenter] = useState(initPosition)
 
@@ -19,6 +19,11 @@ function DataContainer({ mode, countries, global }) {
     setCenter(() => pointCountry.latlng)
     return setCurrentCountry(pointCountry)
   }
+
+  useEffect(() => {
+    if (Object.keys(matchFromSearch).length) chooseCountry(matchFromSearch)
+  }, [matchFromSearch])
+
   return (
     <section className="root">
       <div className="root-items-container">
@@ -65,5 +70,6 @@ DataContainer.propTypes = {
     state: PropTypes.string,
     isPopulation: PropTypes.bool,
   }).isRequired,
+  matchFromSearch: PropTypes.shape({}).isRequired,
 }
 export default DataContainer
