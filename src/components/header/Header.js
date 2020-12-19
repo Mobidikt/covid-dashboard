@@ -13,7 +13,7 @@ import Search from '../search'
 import Selector from '../selector'
 import Switcher from '../switcher'
 
-const Header = ({ setMode }) => {
+const Header = ({ setMode, countries, matchInApp }) => {
   const [isOnPopulation, setIsOnPopulation] = useState(false)
   const [isLastDay, setIsLastDay] = useState(false)
   const [id, setId] = useState(0)
@@ -43,6 +43,8 @@ const Header = ({ setMode }) => {
   const renderStateLastDay = (value) => {
     setIsLastDay(value)
   }
+  const liftMatchToApp = (country) => matchInApp(country)
+
   return (
     <header>
       <AppBar className="header" position="fixed">
@@ -55,7 +57,7 @@ const Header = ({ setMode }) => {
             {NAV_TEXT[id]}
             {isOnPopulation ? PER100 : ''}
           </h1>
-          <Search />
+          <Search countries={countries} liftMatchToApp={liftMatchToApp} />
         </Toolbar>
         <div className="header__menu">
           <Selector
@@ -80,6 +82,9 @@ const Header = ({ setMode }) => {
   )
 }
 Header.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   setMode: PropTypes.func.isRequired,
+  matchInApp: PropTypes.func.isRequired,
 }
+
 export default Header

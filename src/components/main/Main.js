@@ -2,10 +2,15 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import DataContainer from '../data-container'
 
-function Main({ countries, mode, global }) {
+function Main({ countries, mode, global, matchFromSearch }) {
   return (
     <>
-      <DataContainer mode={mode} countries={countries} global={global} />
+      <DataContainer
+        mode={mode}
+        countries={countries}
+        global={global}
+        matchFromSearch={matchFromSearch}
+      />
     </>
   )
 }
@@ -33,6 +38,7 @@ Main.propTypes = {
     }),
     population: PropTypes.number,
   }),
+  matchFromSearch: PropTypes.shape({}).isRequired,
 }
 
 export default Main
