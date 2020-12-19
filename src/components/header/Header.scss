@@ -2,6 +2,7 @@
       display: flex;
       flex-direction: column;
       min-height: 180px;
+      box-sizing: border-box;
   }
   .header__toolbar {
     display: flex;
@@ -11,11 +12,7 @@
     margin: 0 auto 10px;
     height: 100px;
   }
-//   navigation: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     justifyContent: 'space-between',
-//   },
+  
   .header__menu {
     display: flex;
     justify-content: space-between;
@@ -37,6 +34,13 @@
       width: 230px;
       font-size: 25px;
   }
+  .header__logo{
+    width: 150px !important;
+      font-size: 20px !important;
+  }
 }
-  
-//   navigation__selectors: { display: 'flex', justifyContent: 'space-between' },
+@media screen and (max-width: 600px) {
+  .header__logo{
+    width: 100px !important;
+  }
+  }

@@ -1,14 +1,21 @@
 /* eslint-disable no-return-await */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-underscore-dangle */
+import {
+  GLOBAL_POPULATION,
+  GLOBAL_FLAG,
+  GLOBAL_NAME,
+  API_COVID_WORLD_DAILY_BASE,
+  API_COVID_BASE,
+  API_URL_FLAGS_AND_POPULATION,
+} from '../constants/servicesConstants'
+
 export default class CovidService {
-  GLOBAL_POPULATION = 7500000000
+  _apiCovidWorldDailyBase = API_COVID_WORLD_DAILY_BASE
 
-  _apiCovidWorldDailyBase = `https://covid19.mathdro.id/api/daily`
+  _apiCovidBase = API_COVID_BASE
 
-  _apiCovidBase = `https://api.covid19api.com/`
-
-  _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;latlng;`
+  _apiFlagsAndPopulation = API_URL_FLAGS_AND_POPULATION
 
   // API COVID-19
   getCovidResource = async (url) => {
@@ -128,7 +135,9 @@ export default class CovidService {
         deaths: object.NewDeaths,
         recovered: object.NewRecovered,
       },
-      population: this.GLOBAL_POPULATION,
+      population: GLOBAL_POPULATION,
+      flag: GLOBAL_FLAG,
+      name: GLOBAL_NAME,
     }
   }
 

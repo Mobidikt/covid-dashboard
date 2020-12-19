@@ -21,7 +21,10 @@ const Chart = ({ global, mode, currentCountry }) => {
       covidService.getCasesForCountryDaily(currentCountry.slug).then((data) => {
         setDailyCountryData(data)
       })
-    }
+    } else
+      covidService.getCasesForWorldDaily().then((data) => {
+        setDailyCountryData(data)
+      })
   }, [currentCountry])
 
   const dailyCountryOrWorld = dailyCountryData.length

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { AppBar, Toolbar, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import {
   NAV_TEXT,
@@ -14,21 +13,7 @@ import Search from '../search'
 import Selector from '../selector'
 import Switcher from '../switcher'
 
-const useStyles = makeStyles((theme) => ({
-  header__logo: {
-    [theme.breakpoints.up('xs')]: {
-      width: '100px',
-      fontSize: '20px',
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: '150px',
-      fontSize: '20px',
-    },
-  },
-}))
-
 const Header = ({ setMode, countries, matchInApp }) => {
-  const classes = useStyles()
   const [isOnPopulation, setIsOnPopulation] = useState(false)
   const [isLastDay, setIsLastDay] = useState(false)
   const [id, setId] = useState(0)
@@ -64,7 +49,7 @@ const Header = ({ setMode, countries, matchInApp }) => {
     <header>
       <AppBar className="header" position="fixed">
         <Toolbar className="header__toolbar">
-          <Typography className={classes.header__logo} variant="h5">
+          <Typography className="header__logo" variant="h5">
             Covid19 Dashboard
           </Typography>
           <h1 className="header__title">
@@ -101,4 +86,5 @@ Header.propTypes = {
   setMode: PropTypes.func.isRequired,
   matchInApp: PropTypes.func.isRequired,
 }
+
 export default Header

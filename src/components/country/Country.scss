@@ -1,9 +1,13 @@
 .country-flag {
+  border: 1px solid #000000;
   height: 20px;
   width: 30px;
   margin-right: 10px;
+  object-fit: cover;
 }
 
-.country-item {
-  display: block;
+.country {
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+  border-bottom: 1px solid rgb(182, 179, 179) !important;
 }

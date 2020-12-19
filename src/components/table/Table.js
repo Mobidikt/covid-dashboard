@@ -30,18 +30,21 @@ function Table({ global, mode, currentCountry }) {
           count={confirmedCount}
           modeTime={modeTime}
           titleColor="orange"
+          decimals={mode.isPopulation}
         />
         <Cardboard
           title="Deaths"
           count={deathsCount}
           modeTime={modeTime}
           titleColor="red"
+          decimals={mode.isPopulation}
         />
         <Cardboard
           title="Recovered"
           count={recoveredCount}
           modeTime={modeTime}
           titleColor="blue"
+          decimals={mode.isPopulation}
         />
       </Grid>
     </div>
