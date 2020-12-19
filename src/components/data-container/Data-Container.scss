@@ -1,9 +1,10 @@
 .root {
-  margin-bottom: 130px;
+  margin-bottom: 50px;
 
   .root-items-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   .list-container {
