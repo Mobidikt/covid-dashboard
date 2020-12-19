@@ -36,9 +36,7 @@ function CircleItem({ center, mode, country, onClick }) {
           <h1>{`${country.name}`}</h1>
           <p className="popup-subtitle">
             {`${mode.time} ${mode.state}: `}
-            <span className="popup-subtitle-number">
-              {mode.isPopulation ? `${num}` : `${num}`}
-            </span>
+            <span className="popup-subtitle-number">{`${num}`}</span>
           </p>
         </Popup>
       </CircleMarker>
