@@ -22,9 +22,8 @@ function CircleItem({ center, mode, country, onClick }) {
   }
 
   const num = mode.isPopulation
-    ? calculationPopulation(country[mode.time][mode.state], country).toFixed()
+    ? calculationPopulation(country[mode.time][mode.state], country).toFixed(3)
     : country[mode.time][mode.state]
-
   return (
     <>
       <CircleMarker
@@ -37,7 +36,9 @@ function CircleItem({ center, mode, country, onClick }) {
           <h1>{`${country.name}`}</h1>
           <p className="popup-subtitle">
             {`${mode.time} ${mode.state}: `}
-            <span className="popup-subtitle-number">{`${num}`}</span>
+            <span className="popup-subtitle-number">
+              {mode.isPopulation ? `${num}` : `${num}`}
+            </span>
           </p>
         </Popup>
       </CircleMarker>

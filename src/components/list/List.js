@@ -24,6 +24,9 @@ function List({
         countryOrWorld
       )
     : countryOrWorld[mode.time][mode.state]
+  const stateCountWorld = mode.isPopulation
+    ? calculationPopulation(global[mode.time][mode.state], global)
+    : global[mode.time][mode.state]
   const onClick = (country) => {
     onClickCountry(country)
   }
@@ -66,21 +69,25 @@ function List({
         />
         {countryOrWorld.name}
         <CountUp
-          start={0}
+          start={0.0}
           style={{ color: colorText }}
           end={stateCount}
           duration={2}
           separator="."
+          decimal=","
+          decimals={mode.isPopulation ? 3 : 0}
         />
       </Typography>
       <ul className="list__countries">
         {isWorld ? (
           <World
-            count={stateCount}
+            count={stateCountWorld}
             country={global.name}
             onClick={onWorld}
             key={global.name}
             flag={global.flag}
+            colorText={colorText}
+            decimals={mode.isPopulation}
           />
         ) : (
           <></>
@@ -90,18 +97,15 @@ function List({
           <Country
             count={
               mode.isPopulation
-                ? Math.round(
-                    calculationPopulation(
-                      country[mode.time][mode.state],
-                      country
-                    )
-                  )
+                ? calculationPopulation(country[mode.time][mode.state], country)
                 : country[mode.time][mode.state]
             }
+            decimals={mode.isPopulation}
             country={country.name}
             onClick={onClick}
             key={country.name}
             flag={country.flag}
+            colorText={colorText}
           />
         ))}
       </ul>
