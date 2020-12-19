@@ -18,7 +18,7 @@ function CircleItem({ center, mode, country, onClick }) {
     const calculatedRadius = getDiameter(
       calculateTotalRadius(item[mode.time][mode.state])
     )
-    return mode.isPopulation ? getDiameter(calculatedRadius) : calculatedRadius
+    return calculatedRadius
   }
 
   const num = mode.isPopulation
