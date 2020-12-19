@@ -12,6 +12,7 @@
     margin: 0 auto 10px;
     height: 100px;
   }
+  
   .header__menu {
     display: flex;
     justify-content: space-between;
@@ -33,5 +34,13 @@
       width: 230px;
       font-size: 25px;
   }
+  .header__logo{
+    width: 150px !important;
+      font-size: 20px !important;
+  }
 }
-  
+@media screen and (max-width: 600px) {
+  .header__logo{
+    width: 100px !important;
+  }
+  }
