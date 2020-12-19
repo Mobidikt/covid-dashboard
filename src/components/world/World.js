@@ -3,15 +3,14 @@ import PropTypes from 'prop-types'
 import CountUp from 'react-countup'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import './Country.scss'
 
-function Country({ decimals, colorText, country, onClick, flag, count }) {
+function World({ decimals, colorText, country, onClick, flag, count }) {
   const handleClick = () => {
-    onClick(country)
+    onClick({})
   }
   return (
     <ListItem className="country" button onClick={handleClick}>
-      <img src={flag} className="country-flag" alt={`${country} flag`} />
+      <img src={flag} className="country-flag" alt="flag" />
       <ListItemText primary={` ${country} `} />
       <CountUp
         start={0.0}
@@ -25,10 +24,10 @@ function Country({ decimals, colorText, country, onClick, flag, count }) {
     </ListItem>
   )
 }
-Country.defaultProps = {
+World.defaultProps = {
   flag: '',
 }
-Country.propTypes = {
+World.propTypes = {
   colorText: PropTypes.string.isRequired,
   decimals: PropTypes.bool.isRequired,
   country: PropTypes.string.isRequired,
@@ -36,4 +35,4 @@ Country.propTypes = {
   onClick: PropTypes.func.isRequired,
   flag: PropTypes.string,
 }
-export default Country
+export default World

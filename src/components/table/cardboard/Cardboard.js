@@ -4,7 +4,7 @@ import CountUp from 'react-countup'
 import PropTypes from 'prop-types'
 import { Grid, Card, Typography, CardContent } from '@material-ui/core/'
 
-function Cardboard({ title, count, modeTime, titleColor }) {
+function Cardboard({ decimals, title, count, modeTime, titleColor }) {
   const modeLabel =
     modeTime === 'total' ? 'for the whole peridor' : 'for the last day'
   return (
@@ -19,7 +19,14 @@ function Cardboard({ title, count, modeTime, titleColor }) {
               className="card-title-information__count"
               variant="body2"
             >
-              <CountUp start={0} end={count} duration={2} separator="." />
+              <CountUp
+                start={0}
+                end={count}
+                duration={2}
+                separator="."
+                decimal=","
+                decimals={decimals ? 3 : 0}
+              />
             </Typography>
             <Typography variant="body2">{modeLabel}</Typography>
           </div>
@@ -41,6 +48,7 @@ Cardboard.propTypes = {
   count: PropTypes.number,
   modeTime: PropTypes.string,
   titleColor: PropTypes.string,
+  decimals: PropTypes.bool.isRequired,
 }
 
 export default Cardboard

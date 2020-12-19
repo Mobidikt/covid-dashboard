@@ -22,9 +22,8 @@ function CircleItem({ center, mode, country, onClick }) {
   }
 
   const num = mode.isPopulation
-    ? calculationPopulation(country[mode.time][mode.state], country).toFixed()
+    ? calculationPopulation(country[mode.time][mode.state], country).toFixed(3)
     : country[mode.time][mode.state]
-
   return (
     <>
       <CircleMarker
