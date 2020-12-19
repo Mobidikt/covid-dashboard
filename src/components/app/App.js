@@ -18,6 +18,8 @@ function App() {
       deaths: 0,
       recovered: 0,
     },
+    name: 'World',
+    flag: '',
     population: 0,
   })
   const [countries, setCountries] = useState([])

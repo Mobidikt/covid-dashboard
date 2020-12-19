@@ -1,13 +1,21 @@
 import { Typography } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import CountUp from 'react-countup'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import calculationPopulation from '../../utils/calculationPopulation'
 import Country from '../country'
-// import { world } from '../../constants/constants'
 import './List.scss'
+import World from '../world/World'
 
-function List({ global, countries, mode, onClickCountry, currentCountry }) {
+function List({
+  global,
+  countries,
+  mode,
+  onClickCountry,
+  currentCountry,
+  resetCurrentCountry,
+}) {
+  const [isWorld, setIsWorld] = useState(true)
   const countryOrWorld =
     Object.keys(currentCountry).length === 0 ? global : currentCountry
   const stateCount = mode.isPopulation
@@ -29,8 +37,7 @@ function List({ global, countries, mode, onClickCountry, currentCountry }) {
       }
       return b[mode.time][mode.state] - a[mode.time][mode.state]
     })
-  }, [mode, countries, currentCountry])
-
+  }, [mode, countries])
   const colorText = useMemo(() => {
     if (mode.state === 'confirmed') {
       return 'orange'
@@ -40,6 +47,15 @@ function List({ global, countries, mode, onClickCountry, currentCountry }) {
     }
     return 'blue'
   }, [mode])
+  const onWorld = () => {
+    resetCurrentCountry()
+  }
+  useEffect(() => {
+    if (countryOrWorld.name === 'World') {
+      return setIsWorld(false)
+    }
+    return setIsWorld(true)
+  }, [countryOrWorld])
   return (
     <div className="list-container">
       <Typography className="list__title" variant="h6" component="h2">
@@ -58,6 +74,17 @@ function List({ global, countries, mode, onClickCountry, currentCountry }) {
         />
       </Typography>
       <ul className="list__countries">
+        {isWorld ? (
+          <World
+            count={stateCount}
+            country={global.name}
+            onClick={onWorld}
+            key={global.name}
+            flag={global.flag}
+          />
+        ) : (
+          <></>
+        )}
         {sortCountries.map((country) => (
           <Country
             count={
@@ -95,6 +122,8 @@ List.propTypes = {
       deaths: PropTypes.number,
       recovered: PropTypes.number,
     }),
+    name: PropTypes.string,
+    flag: PropTypes.string,
     population: PropTypes.number,
   }),
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -118,5 +147,6 @@ List.propTypes = {
     name: PropTypes.string,
     population: PropTypes.number,
   }).isRequired,
+  resetCurrentCountry: PropTypes.func.isRequired,
 }
 export default List
