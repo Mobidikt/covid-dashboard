@@ -102,7 +102,7 @@ export default class CovidService {
     const month = date.getMonth()
     const year = date.getFullYear()
 
-    return `${day}/${month + 1}/${year}`
+    return `${day}.${month + 1}.${year}`
   }
 
   _createList = (item, idx) => {
@@ -138,7 +138,7 @@ export default class CovidService {
       confirmed: object.totalConfirmed,
       deaths: object.deaths.total,
       recovered: object.totalRecovered,
-      date: new Date(object.reportDate),
+      date: object.reportDate,
     }
   }
 
@@ -148,7 +148,7 @@ export default class CovidService {
       confirmed: object.Confirmed,
       deaths: object.Deaths,
       recovered: object.Recovered,
-      date: new Date(object.Date),
+      date: new Date(object.Date).toLocaleDateString(),
     }
   }
 }
