@@ -6,22 +6,26 @@ import './Search.scss'
 
 const Search = ({ countries, liftMatchToApp }) => {
   const [matches, setMatches] = useState([])
-  const [text, setText] = useState('')
 
-  const countryFilter = (wordToMatch) =>
-    countries.filter((country) => {
-      const reg = new RegExp(wordToMatch, 'gi')
-      return country.name.match(reg)
-    })
+  const liftedMatch = (country) => liftMatchToApp(country)
+
+  const countryFilter = (word) =>
+    setMatches(() =>
+      countries.filter((country) => {
+        const reg = new RegExp(word, 'gi')
+        return country.name.match(reg)
+      })
+    )
 
   function findMatches(e) {
     const { value } = e.target
-    setText(value)
-    const array = countryFilter(value)
-    setMatches(() => array)
+    if (!value) return
+    countryFilter(value)
+    const match = matches.filter((el) => el.name === value).length
+      ? matches.find((el) => el.name === value)
+      : null
+    if (match) liftedMatch(match)
   }
-
-  const liftedMatch = (country) => liftMatchToApp(country)
 
   return (
     <>
@@ -37,7 +41,7 @@ const Search = ({ countries, liftMatchToApp }) => {
           onChange={findMatches}
         />
       </div>
-      <MatchList text={text} liftedMatch={liftedMatch} matches={matches} />
+      <MatchList matches={matches} />
     </>
   )
 }
