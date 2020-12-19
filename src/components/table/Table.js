@@ -13,8 +13,6 @@ function Table({ global, mode, currentCountry }) {
     return 'loading...'
   }
   const modeTime = mode.time
-  // console.log(global[modeTime].confirmed)
-
   const confirmedCount = mode.isPopulation
     ? calculationPopulation(countryOrWorld[modeTime].confirmed, countryOrWorld)
     : countryOrWorld[modeTime].confirmed

@@ -9,6 +9,8 @@ export default class CovidService {
 
   GLOBAL_NAME = 'World'
 
+  _apiCovidWorldDailyBase = `https://covid19.mathdro.id/api/daily`
+
   _apiCovidBase = `https://api.covid19api.com/`
 
   _apiFlagsAndPopulation = `https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;latlng;`
@@ -18,6 +20,16 @@ export default class CovidService {
     const res = await fetch(`${this._apiCovidBase}${url}`)
     if (!res.ok) {
       throw new Error(`Couldn't fetch ${url}, received ${res.status}`)
+    }
+    return await res.json()
+  }
+
+  // API COVID-19 world daily
+  getCovidWorldDailyResource = async () => {
+    const res = await fetch(this._apiCovidWorldDailyBase)
+
+    if (!res.ok) {
+      throw new Error(`Couldn't fetch Flags API, received ${res.status}`)
     }
     return await res.json()
   }
@@ -46,6 +58,16 @@ export default class CovidService {
   getAllCountries = async () => {
     const res = await this.getCases(`Countries`)
     return res
+  }
+
+  getCasesForWorldDaily = async () => {
+    const res = await this.getCovidWorldDailyResource()
+    return res.map(this._extractCasesAndDateForWorld)
+  }
+
+  getCasesForCountryDaily = async (slug) => {
+    const res = await this.getCovidResource(`total/dayone/country/${slug}`)
+    return res.map(this._extractCasesAndDate)
   }
 
   getListOfCountries = async () => {
@@ -85,7 +107,7 @@ export default class CovidService {
     const month = date.getMonth()
     const year = date.getFullYear()
 
-    return `${day}/${month + 1}/${year}`
+    return `${day}.${month + 1}.${year}`
   }
 
   _createList = (item, idx) => {
@@ -95,6 +117,7 @@ export default class CovidService {
       id: idx,
       name: item.Country,
       code: item.CountryCode,
+      slug: item.Slug,
     }
   }
 
@@ -115,4 +138,29 @@ export default class CovidService {
       name: this.GLOBAL_NAME,
     }
   }
+
+  _extractCasesAndDateForWorld = (object) => {
+    return {
+      name: 'world',
+      confirmed: object.totalConfirmed,
+      deaths: object.deaths.total,
+      recovered: object.totalRecovered,
+      date: object.reportDate,
+    }
+  }
+
+  _extractCasesAndDate = (object) => {
+    return {
+      name: object.Country,
+      confirmed: object.Confirmed,
+      deaths: object.Deaths,
+      recovered: object.Recovered,
+      date: new Date(object.Date).toLocaleDateString(),
+    }
+  }
 }
+
+// const test = new CovidService().getCasesForCountryDaily('canada')
+// const test2 = new CovidService().getCasesForWorldDaily()
+// console.log(test)
+// console.log(test2)

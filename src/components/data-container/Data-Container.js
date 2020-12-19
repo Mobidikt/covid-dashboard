@@ -23,22 +23,26 @@ function DataContainer({ mode, countries, global }) {
   }
   return (
     <section className="root">
-      <List
-        global={global}
-        countries={countries}
-        mode={mode}
-        onClickCountry={chooseCountry}
-        currentCountry={currentCountry}
-        resetCurrentCountry={resetCurrentCountry}
-      />
-      <Map
-        countries={countries}
-        mode={mode}
-        center={center}
-        onClickCountry={chooseCountry}
-      />
-      <Table global={global} mode={mode} currentCountry={currentCountry} />
-      <Chart />
+      <div className="root-items-container">
+        <Table global={global} mode={mode} currentCountry={currentCountry} />
+        <List
+          global={global}
+          countries={countries}
+          mode={mode}
+          onClickCountry={chooseCountry}
+          currentCountry={currentCountry}
+          resetCurrentCountry={resetCurrentCountry}
+        />
+      </div>
+      <div className="root-items-container">
+        <Map
+          countries={countries}
+          mode={mode}
+          center={center}
+          onClickCountry={chooseCountry}
+        />
+        <Chart global={global} mode={mode} currentCountry={currentCountry} />
+      </div>
     </section>
   )
 }

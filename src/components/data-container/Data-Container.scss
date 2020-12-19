@@ -1,24 +1,38 @@
 .root {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin-bottom: 130px;
+  margin-bottom: 50px;
 
+  .root-items-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .list-container {
+    height: 20vh;
+  }
+  
   .map-container,
-  .table-container,
-  .list-container,
   .chart-container {
+    height: 50vh;
+  }
+  .map-container,
+  .chart-container,
+  .list-container {
     margin: 10px;
     width: 95%;
-    height: 50vh;
     background-color: white;
   }
+
 }
 
 @media screen and (min-width: 750px) {
   .root {
+    display: inline-flex;
     flex-direction: row;
+    justify-content: center;
+
+    .root-items-container {
+      width: 48%;
+    }
   }
 }
