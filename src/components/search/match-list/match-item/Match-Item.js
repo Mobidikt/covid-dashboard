@@ -8,7 +8,6 @@ const MatchItem = ({ match }) => {
 MatchItem.propTypes = {
   match: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    code: PropTypes.string.isRequired,
   }).isRequired,
 }
 

@@ -6,7 +6,7 @@ const MatchList = ({ matches }) => {
   return (
     <datalist id="countrySearch">
       {matches.map((match) => (
-        <MatchItem key={match.code} match={match} />
+        <MatchItem key={match.name} match={match} />
       ))}
     </datalist>
   )

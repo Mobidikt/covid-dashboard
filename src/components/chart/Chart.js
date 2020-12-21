@@ -18,7 +18,7 @@ const Chart = ({ global, mode, currentCountry }) => {
 
   useEffect(() => {
     if (Object.keys(currentCountry).length !== 0) {
-      covidService.getCasesForCountryDaily(currentCountry.slug).then((data) => {
+      covidService.getCasesForCountryDaily(currentCountry.iso2).then((data) => {
         setDailyCountryData(data)
       })
     } else
@@ -138,7 +138,7 @@ Chart.propTypes = {
       deaths: PropTypes.number,
       recovered: PropTypes.number,
     }),
-    slug: PropTypes.string,
+    iso2: PropTypes.string,
     name: PropTypes.string,
     population: PropTypes.number,
   }).isRequired,
