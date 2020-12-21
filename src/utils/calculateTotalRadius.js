@@ -1,7 +1,9 @@
+const baseValue = 10
+
 export default function calculateTotalRadius(count) {
   if (count === 0) return 0
-  const dividedByThousand = count / 1000
-  return dividedByThousand <= 1
-    ? Math.sqrt(dividedByThousand) / 1000
-    : Math.log(dividedByThousand)
+  const dividedByBase = count / baseValue
+  return dividedByBase < baseValue
+    ? Math.log(baseValue)
+    : Math.log(dividedByBase)
 }

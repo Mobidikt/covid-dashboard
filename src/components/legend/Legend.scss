@@ -7,6 +7,8 @@ div.leaflet-top.leaflet-right > button.legend-button {
 
 div.info.legend.leaflet-control {
   position: relative;
+  height: 130px;
+  overflow: scroll;
   top: -28px;
   margin: 0;
   background-color: #081217e3;
