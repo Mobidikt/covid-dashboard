@@ -3,9 +3,9 @@ export const initPosition = [0, 0]
 export const initZoom = 1
 
 export const options = {
-  confirmed: { fillColor: '#FFA500', color: 'none', fillOpacity: '.6' },
-  deaths: { fillColor: '#FF0000', color: 'none', fillOpacity: '.6' },
-  recovered: { fillColor: '#0000FF', color: 'none', fillOpacity: '.6' },
+  confirmed: { fillColor: '#FFA500', color: 'none', fillOpacity: '.2' },
+  deaths: { fillColor: '#FF0000', color: 'none', fillOpacity: '.2' },
+  recovered: { fillColor: '#0000FF', color: 'none', fillOpacity: '.2' },
 }
 
 export const getDiameter = (radius) => radius * 2

@@ -7,7 +7,7 @@ function CircleList({ countries, mode, onClick }) {
 
   return countries.map((country) => (
     <CircleItem
-      key={country.code}
+      key={country.name}
       center={country.latlng}
       mode={mode}
       country={country}

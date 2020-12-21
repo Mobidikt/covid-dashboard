@@ -6,7 +6,7 @@ import { Grid, Card, Typography, CardContent } from '@material-ui/core/'
 
 function Cardboard({ decimals, title, count, modeTime, titleColor }) {
   const modeLabel =
-    modeTime === 'total' ? 'for the whole peridor' : 'for the last day'
+    modeTime === 'total' ? 'for the whole period' : 'for the last day'
   return (
     <Grid item component={Card}>
       <CardContent className="card">

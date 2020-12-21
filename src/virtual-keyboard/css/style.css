@@ -1,0 +1,520 @@
+@import 'fonts.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  font-family: 'San Francisco Regular', Arial, sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1040px;
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(201,201,201,0.9738270308123249) 55%);
+}
+
+body::-webkit-scrollbar { width: 0; }
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  margin-top: 10px;
+  padding: 3px;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid black;
+  color: rgb(51, 49, 49);
+  transition: all 1s ease;
+}
+
+.button:hover {
+  color: black;
+  background: rgba(255, 255, 255, 0.589);
+}
+
+.keyboard.hide {
+  display: none;
+}
+
+.keyboard {
+  width: 98vw;
+  max-width: 1040px;
+  padding: 15px;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  position: relative;
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,0.9570203081232493) 7%, rgba(201,201,201,1) 64%);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+
+  -webkit-box-shadow: 0px 0px 13px 3px rgba(255,255,255,1);
+  -moz-box-shadow: 0px 0px 13px 3px rgba(255,255,255,1);
+  box-shadow: 0px 0px 13px 3px rgba(255,255,255,1);
+}
+
+.keyboard__row {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+}
+
+.keyboard__key {
+  display: flex;
+  cursor: pointer;
+  border-radius: 6px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(39 38 38) radial-gradient(circle at 0 0, rgb(123 121 121 / 20%), rgb(0 0 0));
+  box-shadow: inset rgba(0,0,0,.75) -1px -1px 2px, inset rgba(255,255,255,.9) 1px 1px 2px, rgba(0,0,0,.8) 1px 1px 2px -1px;
+  transition: all .2s ease;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  user-select: none;
+}
+
+[data-fn="false"].active {
+  box-shadow: inset 0px 1px 12px 1px rgb(177 152 152 / 78%), inset 0 0 20px 2em rgb(17 16 16);
+}
+
+[data-code="fn"].fn-active {
+  background: rgb(39 38 38) radial-gradient(circle at 0 0, rgb(123 121 121 / 20%), rgb(245 7 7));
+}
+
+[data-code="fn"].fn-disabled {
+  background: rgb(39 38 38) radial-gradient(circle at 0 0, rgb(123 121 121 / 20%), rgb(150 150 150));
+  cursor: initial;
+  pointer-events: none;
+}
+
+[data-fn="true"].active {
+  box-shadow: inset 0px 1px 2px 1px rgba(0,0,0,.9), inset 0 0 20px 2em rgba(255,255,255, 0);
+}
+
+[data-code="CapsLock"] > .sub.caps-toggle {
+  background: #69f11a;
+}
+
+[data-fn="false"].active .letter,
+[data-fn="true"].active .letter {
+  color: #ffffff;
+}
+
+[data-code*="Key"],
+[data-code*="Bracket"],
+[data-code*="Semi"],
+[data-code*="uote"],
+[data-code*="Digit"],
+[data-code="Minus"],
+[data-code="Equal"],
+[data-code*="lash"],
+[data-code="Comma"],
+[data-code="Period"] {
+  width: 6.3%;
+  min-width: 30px;
+}
+
+[data-code="CapsLock"] {
+  width: 103px;
+}
+
+[data-code="CapsLock"] > .sub {
+  margin: 7px 7px auto;
+  width: 5px;
+  height: 5px;
+  background: #8b8b8b;
+  border-radius: 50%;
+  display: flex;
+  align-self: flex-start;
+}
+
+[data-code*="Shift"] {
+  width: 130px;
+}
+
+[data-code="Enter"] {
+  width: 105px;
+}
+
+[data-code="Tab"] {
+  width: 93px;
+}
+
+[data-code*="Control"],
+[data-code="fn"] {
+  width: 58px;
+}
+
+[data-code="Tab"] > .letter,
+[data-code="CapsLock"] > .letter,
+[data-code*="Shift"] > .letter,
+[data-code="fn"] > .letter,
+[data-code*="Control"] > .letter,
+[data-code*="Alt"] > .letter,
+[data-code*="Meta"] > .letter,
+[data-code="Enter"] > .letter,
+[data-code="Backspace"] > .letter {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  font-size: 12px;
+}
+
+[data-code="Backspace"] > .letter,
+[data-code="Enter"] > .letter,
+[data-code="AltRight"] > .letter,
+[data-code*="ShiftRight"] > .letter {
+  justify-content: flex-end;
+  padding-right: 7px;
+}
+
+[data-code="Tab"],
+[data-code="CapsLock"],
+[data-code*="Shift"],
+[data-code*="Control"],
+[data-code="fn"],
+[data-code*="Alt"],
+[data-code="Enter"],
+[data-code="Backspace"] {
+  padding-bottom: 5px;
+}
+
+[data-code="Tab"] > .letter,
+[data-code="CapsLock"] > .letter,
+[data-code="ShiftLeft"] > .letter,
+[data-code="ControlLeft"] > .letter,
+[data-code="fn"] > .letter,
+[data-code="AltLeft"] > .letter {
+  padding-left: 7px;
+}
+
+[data-code*="Bracket"] > .letter {
+  text-align: center;
+  padding: 0;
+}
+
+[data-code="Backspace"] {
+  width: 88px;
+}
+
+[data-code="Space"] {
+  width: 420px;
+}
+
+[data-code="Space"] > .letter {
+  height: 100%;
+}
+
+[data-code*="Alt"] {
+  width: 55px;
+}
+
+[data-code*="Arrow"] {
+  min-width: 40px;
+  height: 25px;
+}
+
+[data-code*="Arrow"] > .letter {
+  padding: 0;
+}
+[data-code*="Up"] > .letter {
+  padding: 0 0 4px 0;
+  transform: rotate(90deg);
+}
+[data-code*="Down"] > .letter {
+  padding: 0 0 2px 0;
+  transform: rotate(-90deg);
+}
+
+[data-code="ArrowRight"] > .letter {
+  text-align: center;
+  padding: 0 0 5px 0;
+  transform: rotate(180deg);
+}
+
+[data-code="ArrowLeft"],
+[data-code="ArrowRight"] {
+  display: flex;
+  align-self: flex-end;
+}
+
+[data-code*="Meta"] > .letter {
+  width: 70px;
+  padding: 0;
+  padding-bottom: 5px;
+  justify-content: center;
+}
+
+.active {
+  color: snow;
+}
+
+.letter {
+  color: #dedede;
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform-origin: center;
+}
+
+.subtitle, .hint {
+  margin: 4px 20px;
+  text-align: center;
+  color: #666;
+  text-align: center;
+  color: #666;
+}
+
+textarea.output {
+  font-family: 'San Francisco Regular', Arial, sans-serif;
+  margin: 0 auto;
+  resize: none;
+  width: 98vw;
+  min-width: 490px;
+  max-width: 1040px;
+  height: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.sub {
+  width: 100%;
+  color: #d5d5ea;
+  text-align: center;
+  transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+}
+
+.sub.sub-active:not(:empty) {
+  color: rgb(19, 80, 0);
+  font-size: 23px;
+}
+
+.sub.sub-active:not(:empty) ~ .letter.sub-inactive {
+  color: #68688a;
+  font-size: 16px;
+  text-align: center;
+  padding-right: 10px;
+  width: 50%;
+  transform-origin: center;
+  transform: translateX(20px);
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  -o-transform: translateX(20px);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+}
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+    -webkit-transform: scale(2.5);
+    -moz-transform: scale(2.5);
+    -ms-transform: scale(2.5);
+    -o-transform: scale(2.5);
+}
+}
+
+@media screen and (max-width: 940px) {
+  [data-code="Tab"] > .letter,
+  [data-code="CapsLock"] > .letter,
+  [data-code*="Shift"] > .letter,
+  [data-code="fn"] > .letter,
+  [data-code*="Control"] > .letter,
+  [data-code*="Alt"] > .letter,
+  [data-code*="Meta"] > .letter,
+  [data-code="Enter"] > .letter,
+  [data-code="Backspace"] > .letter {
+    font-size: 10px;
+  }
+
+  [data-code="Backspace"] {
+    width: 78px;
+  } 
+
+  [data-code="Space"] {
+    width: 385px;
+  }
+
+  [data-code*="Meta"] {
+    min-width: 45px;
+    width: 58px;
+  }
+
+  .letter {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  
+  .keyboard {
+    padding: 8px;
+  }
+  
+  [data-code="Space"] {
+    width: 38%;
+  }
+
+  [data-code="Tab"] {
+    width: 9%;
+  }
+
+  [data-code="CapsLock"] {
+    width: 11%;
+  }
+  [data-code*="Shift"] {
+    width: 14%;
+  }
+
+  [data-code="Enter"] {
+    width: 12%;
+  }
+
+  [data-code*="Control"], 
+  [data-code="fn"],
+  [data-code*="Alt"] {
+    min-width: 34px;
+    width: 6%;
+  }
+
+  [data-code="Backspace"] {
+    width: 11%;
+  }
+}
+
+@media screen and (max-width: 745px) {
+  
+  [data-code="Tab"] > .letter, 
+  [data-code="CapsLock"] > .letter, 
+  [data-code*="Shift"] > .letter, 
+  [data-code="fn"] > .letter, 
+  [data-code*="Control"] > .letter, 
+  [data-code*="Alt"] > .letter,  
+  [data-code="Enter"] > .letter, 
+  [data-code*="Meta"] > .letter,
+  [data-code="Backspace"] > .letter {
+    font-size: 9px;
+  }
+
+  [data-code="Tab"] > .letter,
+  [data-code="CapsLock"] > .letter, 
+  [data-code="ShiftLeft"] > .letter, 
+  [data-code="ControlLeft"] > .letter, 
+  [data-code="fn"] > .letter {
+    padding-left: 5px;
+  }
+
+  [data-code="Backspace"] > .letter, 
+  [data-code="Enter"] > .letter, 
+  [data-code="AltRight"] > .letter,
+  [data-code*="ShiftRight"] > .letter {
+    padding-right: 5px;
+  }
+  
+  .keyboard__row {
+    height: 45px;
+  }
+
+  [data-code*="Arrow"] {
+    height: 23px;
+  }
+
+  .sub {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 665px) {
+  
+  [data-code="Tab"] > .letter, 
+  [data-code="CapsLock"] > .letter, 
+  [data-code*="Shift"] > .letter, 
+  [data-code="fn"] > .letter, 
+  [data-code*="Control"] > .letter, 
+  [data-code*="Alt"] > .letter, 
+  [data-code="Enter"] > .letter, 
+  [data-code*="Meta"] > .letter, 
+  [data-code="Backspace"] > .letter {
+    font-size: 8px;
+}
+  
+  [data-code="Space"] {
+    width: 33%;
+  }
+
+  [data-code*="Meta"] {
+    width: 9%;
+  }
+
+  [data-code*="Arrow"] {
+    min-width: 30px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+
+  .keyboard__row {
+    height: 40px;
+  }
+
+  [data-code*="Arrow"] {
+    height: 20px;
+  }
+
+  .letter {
+    font-size: 12px;
+  }
+}

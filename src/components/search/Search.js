@@ -4,8 +4,14 @@ import SearchIcon from '@material-ui/icons/Search'
 import MatchList from './match-list'
 import './Search.scss'
 
+// import Keyboard from '../../virtual-keyboard/js/Keyboard'
+// import rowsOrder from '../../virtual-keyboard/js/constants/rowsOrder'
+// import lang from '../../virtual-keyboard/js/constants/lang'
+
 const Search = ({ countries, liftMatchToApp }) => {
   const [matches, setMatches] = useState([])
+  // const keyboard = new Keyboard(rowsOrder).init(lang).generateLayout()
+  // console.log(keyboard)
 
   const liftedMatch = (country) => liftMatchToApp(country)
 
