@@ -8,15 +8,19 @@
     "airbnb",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended",
     "prettier"
   ],
   "plugins": [
     "react",
-    "prettier"
+    "prettier",
+    "react-hooks"
 ],
   "rules": {
     "semi": "off",
     "no-console": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "linebreak-style": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }

@@ -1,30 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Map from '../map'
 import List from '../list'
 import Table from '../table'
 import Chart from '../chart'
 import './Main.scss'
-import { initPosition } from '../../constants/mapConstants'
 
-function Main({ mode, countries, global, matchFromSearch }) {
-  const [currentCountry, setCurrentCountry] = useState({})
-  const [center, setCenter] = useState(initPosition)
-  const chooseCountry = (country) => {
-    const pointCountry = countries.find((el) => el.name === country)
-      ? countries.find((el) => el.name === country)
-      : countries.find((el) => el.name === country.name)
-    setCenter(() => pointCountry.latlng)
-    return setCurrentCountry(pointCountry)
-  }
-
-  useEffect(() => {
-    if (Object.keys(matchFromSearch).length) chooseCountry(matchFromSearch)
-  }, [matchFromSearch])
-
-  const resetCurrentCountry = () => {
-    return setCurrentCountry({})
-  }
+function Main({
+  mode,
+  countries,
+  global,
+  currentCountry,
+  resetCurrentCountry,
+  chooseCountry,
+  center,
+}) {
+  // const [currentCountry, setCurrentCountry] = useState({})
 
   return (
     <section className="root">
@@ -88,6 +79,22 @@ Main.propTypes = {
     state: PropTypes.string,
     isPopulation: PropTypes.bool,
   }).isRequired,
-  matchFromSearch: PropTypes.shape({}).isRequired,
+  center: PropTypes.arrayOf(PropTypes.number).isRequired,
+  currentCountry: PropTypes.shape({
+    total: PropTypes.shape({
+      confirmed: PropTypes.number,
+      deaths: PropTypes.number,
+      recovered: PropTypes.number,
+    }),
+    new: PropTypes.shape({
+      confirmed: PropTypes.number,
+      deaths: PropTypes.number,
+      recovered: PropTypes.number,
+    }),
+    name: PropTypes.string,
+    population: PropTypes.number,
+  }).isRequired,
+  resetCurrentCountry: PropTypes.func.isRequired,
+  chooseCountry: PropTypes.func.isRequired,
 }
 export default Main
