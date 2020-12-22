@@ -82,7 +82,21 @@ const Header = ({ setMode, countries, matchInApp }) => {
   )
 }
 Header.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      total: PropTypes.shape({
+        confirmed: PropTypes.number,
+        deaths: PropTypes.number,
+        recovered: PropTypes.number,
+      }),
+      new: PropTypes.shape({
+        confirmed: PropTypes.number,
+        deaths: PropTypes.number,
+        recovered: PropTypes.number,
+      }),
+      population: PropTypes.number,
+    })
+  ).isRequired,
   setMode: PropTypes.func.isRequired,
   matchInApp: PropTypes.func.isRequired,
 }
