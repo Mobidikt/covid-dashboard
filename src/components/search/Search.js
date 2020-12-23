@@ -4,16 +4,8 @@ import SearchIcon from '@material-ui/icons/Search'
 import MatchList from './match-list'
 import './Search.scss'
 
-// import Keyboard from '../../virtual-keyboard/js/Keyboard'
-// import rowsOrder from '../../virtual-keyboard/js/constants/rowsOrder'
-// import lang from '../../virtual-keyboard/js/constants/lang'
-
-const Search = ({ countries, liftMatchToApp }) => {
+const Search = ({ countries, onSearchChange }) => {
   const [matches, setMatches] = useState([])
-  // const keyboard = new Keyboard(rowsOrder).init(lang).generateLayout()
-  // console.log(keyboard)
-
-  const liftedMatch = (country) => liftMatchToApp(country)
 
   const countryFilter = (word) =>
     setMatches(() =>
@@ -30,7 +22,7 @@ const Search = ({ countries, liftMatchToApp }) => {
     const match = matches.filter((el) => el.name === value).length
       ? matches.find((el) => el.name === value)
       : null
-    if (match) liftedMatch(match)
+    if (match) onSearchChange(match)
   }
 
   return (
@@ -54,7 +46,7 @@ const Search = ({ countries, liftMatchToApp }) => {
 
 Search.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
-  liftMatchToApp: PropTypes.func.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
 }
 
 export default Search

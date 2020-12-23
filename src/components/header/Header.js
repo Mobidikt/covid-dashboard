@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import {
   NAV_TEXT,
   metricFirst,
-  PER100,
-  arr,
+  PER_HUNDRED_THOUSAND,
+  indicator,
 } from '../../constants/navigationConstants'
 
 import './Header.scss'
@@ -13,25 +13,17 @@ import Search from '../search'
 import Selector from '../selector'
 import Switcher from '../switcher'
 
-const Header = ({ setMode, countries, matchInApp }) => {
+const Header = ({ setMode, countries, onSearchChange }) => {
   const [isOnPopulation, setIsOnPopulation] = useState(false)
   const [isLastDay, setIsLastDay] = useState(false)
   const [id, setId] = useState(0)
 
   useEffect(() => {
-    if (isLastDay) {
-      setMode({
-        time: 'new',
-        state: arr[id].state,
-        isPopulation: isOnPopulation,
-      })
-    } else {
-      setMode({
-        time: 'total',
-        state: arr[id].state,
-        isPopulation: isOnPopulation,
-      })
-    }
+    setMode({
+      time: isLastDay ? 'new' : 'total',
+      state: indicator[id],
+      isPopulation: isOnPopulation,
+    })
   }, [isOnPopulation, id, isLastDay])
 
   const stats = (value) => {
@@ -43,7 +35,6 @@ const Header = ({ setMode, countries, matchInApp }) => {
   const renderStateLastDay = (value) => {
     setIsLastDay(value)
   }
-  const liftMatchToApp = (country) => matchInApp(country)
 
   return (
     <header>
@@ -55,9 +46,9 @@ const Header = ({ setMode, countries, matchInApp }) => {
           <h1 className="header__title">
             {isLastDay ? 'Last day ' : 'Global '}
             {NAV_TEXT[id]}
-            {isOnPopulation ? PER100 : ''}
+            {isOnPopulation ? PER_HUNDRED_THOUSAND : ''}
           </h1>
-          <Search countries={countries} liftMatchToApp={liftMatchToApp} />
+          <Search countries={countries} onSearchChange={onSearchChange} />
         </Toolbar>
         <div className="header__menu">
           <Selector
@@ -68,13 +59,13 @@ const Header = ({ setMode, countries, matchInApp }) => {
           />
           <Switcher
             lableText="Last day"
-            isPopulation={isLastDay}
-            setIsPopulation={renderStateLastDay}
+            state={isLastDay}
+            switchState={renderStateLastDay}
           />
           <Switcher
             lableText="per 100.000"
-            isPopulation={isOnPopulation}
-            setIsPopulation={renderFromPopulation}
+            state={isOnPopulation}
+            switchState={renderFromPopulation}
           />
         </div>
       </AppBar>
@@ -82,9 +73,23 @@ const Header = ({ setMode, countries, matchInApp }) => {
   )
 }
 Header.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      total: PropTypes.shape({
+        confirmed: PropTypes.number,
+        deaths: PropTypes.number,
+        recovered: PropTypes.number,
+      }),
+      new: PropTypes.shape({
+        confirmed: PropTypes.number,
+        deaths: PropTypes.number,
+        recovered: PropTypes.number,
+      }),
+      population: PropTypes.number,
+    })
+  ).isRequired,
   setMode: PropTypes.func.isRequired,
-  matchInApp: PropTypes.func.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
 }
 
 export default Header

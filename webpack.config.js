@@ -5,10 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 
-function setDMode() {
-  return isProd ? 'production' : 'development'
-}
-
 const jsLoaders = () => {
   const loaders = [
     {
@@ -23,7 +19,6 @@ const jsLoaders = () => {
 }
 
 module.exports = {
-  mode: setDMode(),
   entry: './src/index.js',
   output: {
     filename: '[name].[hash].js',
