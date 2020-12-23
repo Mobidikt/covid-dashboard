@@ -2,6 +2,7 @@ import React from 'react'
 import { Typography, Link } from '@material-ui/core'
 import Date from '../date'
 import './Footer.scss'
+import ErrorBoundary from '../error-boundary'
 
 const Footer = () => {
   return (
@@ -47,7 +48,9 @@ const Footer = () => {
           </Link>
           <Typography>2020</Typography>
         </div>
-        <Date />
+        <ErrorBoundary>
+          <Date />
+        </ErrorBoundary>
       </div>
     </footer>
   )

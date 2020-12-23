@@ -8,7 +8,7 @@ import ChangeMapPoint from '../change-map-point'
 import './Map.scss'
 import { initZoom } from '../../constants/mapConstants'
 
-function Map({ countries, mode, center, onClickCountry }) {
+function Map({ countries = [], mode, center, onClickCountry }) {
   const [zoom] = useState(initZoom)
   const [legend] = useState(<Legend />)
   const chooseCountryInMap = (country) => onClickCountry(country)
@@ -36,11 +36,8 @@ function Map({ countries, mode, center, onClickCountry }) {
   )
 }
 
-Map.defaultProps = {
-  countries: [],
-}
 Map.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.object),
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   mode: PropTypes.shape({
     time: PropTypes.string,
     state: PropTypes.string,

@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 /* eslint-disable no-underscore-dangle */
 import {
   GLOBAL_LATLNG,
@@ -19,7 +20,9 @@ export default class CovidService {
       const res = await fetch(`${this._secondApiCovidBase}${url}`)
       return await res.json()
     } catch (e) {
-      throw new Error(`Couldn't fetch, received ${e}`)
+      const isError = true
+      const address = `${this._secondApiCovidBase}${url}`
+      throw new Error([isError, e, address])
     }
   }
 
@@ -28,7 +31,9 @@ export default class CovidService {
       const res = await fetch(this._apiCovidWorldDailyBase)
       return await res.json()
     } catch (e) {
-      throw new Error(`Couldn't fetch CovidWorldDaily API. Error: ${e}`)
+      const isError = true
+      const address = `${this._apiCovidWorldDailyBase}`
+      throw new Error([isError, e, address])
     }
   }
 
@@ -37,9 +42,7 @@ export default class CovidService {
       const res = await this.getCovidResource(SECOND_PATH_TO_GLOBAL_CASES)
       return this._extractCases(res)
     } catch (e) {
-      throw new Error(
-        `We have some problem with API for World Cases. Error: ${e}. Please, try later`
-      )
+      throw new Error(e)
     }
   }
 
@@ -48,9 +51,7 @@ export default class CovidService {
       const res = await this.getCovidResource(SECOND_PATH_TO_COUNTRY_CASES)
       return res.map(this._extractCases)
     } catch (e) {
-      throw new Error(
-        `We have some problem with API for Country Cases. Error: ${e}. Please, try later`
-      )
+      throw new Error(e)
     }
   }
 
@@ -59,9 +60,7 @@ export default class CovidService {
       const res = await this.getCovidWorldDailyResource()
       return res.map(this._extractCasesAndDateForWorld)
     } catch (e) {
-      throw new Error(
-        `We have some problem with API for world daily cases. Error: ${e}. Please, try later`
-      )
+      throw new Error(e)
     }
   }
 
@@ -72,17 +71,21 @@ export default class CovidService {
       )
       return this._createDailyArrayForCountry(res)
     } catch (e) {
-      throw new Error(`Couldn't fetch Covid Country Daily API. Error: ${e}`)
+      throw new Error(e)
     }
   }
 
   getActualDate = async () => {
-    const res = await this.getCovidResource(SECOND_PATH_TO_GLOBAL_CASES)
-    const date = new Date(res.updated)
-    const day = date.getDate()
-    const month = date.getMonth()
-    const year = date.getFullYear()
-    return `${day - 1}.${month + 1}.${year}`
+    try {
+      const res = await this.getCovidResource(SECOND_PATH_TO_GLOBAL_CASES)
+      const date = new Date(res.updated)
+      const day = date.getDate()
+      const month = date.getMonth()
+      const year = date.getFullYear()
+      return `${day - 1}.${month + 1}.${year}`
+    } catch (e) {
+      throw new Error(e)
+    }
   }
 
   _extractCases = (object) => {
@@ -96,6 +99,7 @@ export default class CovidService {
       ? [object.countryInfo.lat, object.countryInfo.long]
       : GLOBAL_LATLNG
 
+    // eslint-disable-next-line consistent-return
     return {
       iso2,
       population,

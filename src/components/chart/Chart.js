@@ -3,17 +3,29 @@ import './Chart.scss'
 import PropTypes from 'prop-types'
 import { Line, Bar } from 'react-chartjs-2'
 import CovidService from '../../service/covid-service'
+import ErrorBoundary from '../error-boundary'
+import errorAppearance from '../../utils/errorAppearance'
+
+const covidService = new CovidService()
 
 const Chart = ({ global, mode, currentCountry }) => {
   const [dailyWorldData, setWorldDailyData] = useState([])
   const [dailyCountryData, setDailyCountryData] = useState([])
-  const covidService = new CovidService()
+  const [isError, setIsError] = useState(false)
+  const [response, setResponse] = useState('')
   const modeTime = mode.time
 
   useEffect(() => {
-    covidService.getCasesForWorldDaily().then((data) => {
-      setWorldDailyData(data)
-    })
+    covidService
+      .getCasesForWorldDaily()
+      .then((data) => {
+        setWorldDailyData(data)
+      })
+      .catch((error) => {
+        const arr = errorAppearance(error)
+        setIsError(Boolean(arr.shift()))
+        setResponse(arr.join(': '))
+      })
   }, [])
 
   useEffect(() => {
@@ -102,7 +114,11 @@ const Chart = ({ global, mode, currentCountry }) => {
       />
     )
 
-  return <div className="chart-container">{lineChart}</div>
+  return (
+    <ErrorBoundary isError={isError} response={response}>
+      <div className="chart-container">{lineChart}</div>
+    </ErrorBoundary>
+  )
 }
 
 Chart.defaultProps = {

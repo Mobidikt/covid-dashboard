@@ -4,8 +4,11 @@ import Header from '../header'
 import Footer from '../footer'
 import Main from '../main'
 import { initPosition } from '../../constants/mapConstants'
+import errorAppearance from '../../utils/errorAppearance'
 
 import CovidService from '../../service/covid-service'
+
+const covidService = new CovidService()
 
 function App() {
   const [global, setGlobal] = useState({
@@ -24,11 +27,10 @@ function App() {
     population: 0,
   })
   const [countries, setCountries] = useState([])
-  // eslint-disable-next-line no-unused-vars
   const [currentCountry, setCurrentCountry] = useState({})
   const [center, setCenter] = useState(initPosition)
-  // const [selectedCountry, setSelectedCountry] = useState({})
-  const covidService = new CovidService()
+  const [isError, setIsError] = useState(false)
+  const [response, setResponse] = useState('')
 
   useEffect(() => {
     covidService
@@ -36,16 +38,26 @@ function App() {
       .then((globalStatistics) => {
         setGlobal(globalStatistics)
       })
-      .catch(() => {})
+      .catch((error) => {
+        const arr = errorAppearance(error)
+        setIsError(Boolean(arr.shift()))
+        setResponse(arr.join(': '))
+      })
   }, [])
+
   useEffect(() => {
     covidService
       .getListOfCountriesWithFlags()
       .then((allCountriesInfo) => {
         setCountries(allCountriesInfo)
       })
-      .catch(() => {})
+      .catch((error) => {
+        const arr = errorAppearance(error)
+        setIsError(Boolean(arr.shift()))
+        setResponse(arr.join(': '))
+      })
   }, [])
+
   const [mode, setMode] = useState({
     time: 'total',
     state: 'confirmed',
@@ -84,6 +96,8 @@ function App() {
         resetCurrentCountry={resetCurrentCountry}
         chooseCountry={chooseCountry}
         center={center}
+        isError={isError}
+        response={response}
       />
       <Footer />
     </div>
