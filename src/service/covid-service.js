@@ -49,7 +49,9 @@ export default class CovidService {
   getListOfCountriesWithFlags = async () => {
     try {
       const res = await this.getCovidResource(SECOND_PATH_TO_COUNTRY_CASES)
-      return res.map(this._extractCases)
+      return res
+        .filter((country) => country.countryInfo._id)
+        .map(this._extractCases)
     } catch (e) {
       throw new Error(e)
     }
