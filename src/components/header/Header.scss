@@ -1,0 +1,46 @@
+  .header{
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+      box-sizing: border-box;
+  }
+  .header__toolbar {
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+    max-width: 1280px;
+    margin: 0 auto 10px;
+    height: 100px;
+  }
+  
+  .header__menu {
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+    max-width: 1280px;
+    margin: 0 auto 10px;
+  }
+  .header__title{
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      font-size: 30px;
+      font-weight: 400;
+    line-height: 1.235;
+    letter-spacing: 0.00735em;
+    text-align: center;
+    margin: 10px 5px 0;
+  }
+@media screen and (max-width: 900px) {
+  .header__title{
+      width: 230px;
+      font-size: 25px;
+  }
+  .header__logo{
+    width: 150px !important;
+      font-size: 20px !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  .header__logo{
+    width: 100px !important;
+  }
+  }

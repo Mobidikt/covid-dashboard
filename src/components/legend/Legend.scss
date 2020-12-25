@@ -1,0 +1,29 @@
+div.leaflet-top.leaflet-right > button.legend-button {
+  margin: 3px;
+  z-index: 1000;
+  background-color: #1e414ee0;
+  color: white;
+}
+
+div.info.legend.leaflet-control {
+  position: relative;
+  height: 130px;
+  overflow: scroll;
+  top: -28px;
+  margin: 0;
+  background-color: #081217e3;
+  padding: 10px;
+  color: aliceblue;
+}
+
+div.info.legend.leaflet-control > div {
+  display: flex;
+  align-items: center;
+}
+
+div.info.legend.leaflet-control > div > i {
+  margin: 5px;
+  display: inline-block;
+  border-radius: 50%;
+  opacity:0.6;
+}
